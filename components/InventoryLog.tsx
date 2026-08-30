@@ -130,6 +130,21 @@ export default function InventoryLog() {
     filter === "all"
       ? projectItems
       : projectItems.filter((i) => i.type === filter);
+  // Below `lg` the slots scroll as a single horizontal row, so only a modest
+  // padding count is needed. At `lg`+ the grid is 4 columns wide and padded
+  // out to a fixed 5 rows of slots.
+  const [isLgUp, setIsLgUp] = useState(false);
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const update = () => setIsLgUp(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+  const totalSlots = isLgUp
+    ? Math.max(visible.length, 5 * 4)
+    : Math.max(12, visible.length);
+  const emptySlotCount = totalSlots - visible.length;
   const [selectedId, setSelectedId] = useState(visible[0]?.id);
   const selected = projectItems.find((i) => i.id === selectedId) ?? visible[0];
   const [expanded, setExpanded] = useState(false);
@@ -259,7 +274,7 @@ export default function InventoryLog() {
   }, [expanded]);
 
   return (
-    <div className="p-4 sm:p-6">
+    <div className="flex-1 p-4 sm:p-6">
       {/* Filter tabs, like inventory category buttons */}
       <div
         role="tablist"
@@ -286,7 +301,7 @@ export default function InventoryLog() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.3fr]">
         {/* Item slot grid */}
         <div
-          className="grid grid-cols-3 gap-2 content-start sm:grid-cols-4"
+          className="flex gap-2 overflow-x-auto pb-2 lg:grid lg:grid-cols-4 lg:content-start lg:pb-0"
           role="list"
           aria-label="Inventory items"
         >
@@ -299,7 +314,7 @@ export default function InventoryLog() {
                 onClick={() => selectItem(item.id)}
                 aria-pressed={isSelected}
                 title={item.name}
-                className={`relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-lg border-2 bg-editor-panel p-2 text-center transition-transform hover:-translate-y-0.5 ${
+                className={`relative flex aspect-square w-24 shrink-0 flex-col items-center justify-center overflow-hidden rounded-lg border-2 bg-editor-panel p-2 text-center transition-transform hover:-translate-y-0.5 sm:w-28 lg:w-auto ${
                   rarityBorder[item.rarity]
                 } ${isSelected ? rarityGlow[item.rarity] : ""} ${
                   isSelected ? "ring-1 ring-editor-text/30" : ""
@@ -337,11 +352,14 @@ export default function InventoryLog() {
               </button>
             );
           })}
-          {visible.length === 0 && (
-            <p className="col-span-full py-8 text-center font-mono text-sm text-editor-muted">
-              // nothing in this slot yet
-            </p>
-          )}
+          {Array.from({ length: emptySlotCount }).map((_, i) => (
+            <div
+              key={`empty-${i}`}
+              role="listitem"
+              aria-hidden="true"
+              className="aspect-square w-24 shrink-0 rounded-lg border-2 border-dashed border-editor-line/30 bg-editor-panel/40 sm:w-28 lg:w-auto"
+            />
+          ))}
         </div>
 
         {/* Detail panel */}

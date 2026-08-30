@@ -4,8 +4,8 @@ import { FaLinkedin } from "react-icons/fa";
 
 export default function Hero() {
   return (
-    <div className="flex justify-center content-center border-b border-editor-line px-4 py-12 sm:px-6 sm:py-16">
-      <div className="basis-2/3 content-center">
+    <div className="flex flex-col-reverse items-center justify-center gap-6 content-center border-b border-editor-line px-4 py-12 sm:flex-row sm:items-stretch sm:gap-0 sm:px-6 sm:py-16">
+      <div className="basis-auto sm:basis-2/3 content-center">
         <p className="font-mono text-sm text-editor-muted">
           <span className="text-editor-violet">01</span> import {"{"} you {"}"}{" "}
           from &quot;self&quot;;
@@ -47,7 +47,7 @@ export default function Hero() {
           </a>
         </div>
       </div>
-      <div className="relative h-[200px] w-[200px] self-start overflow-hidden rounded-full">
+      <div className="relative h-[200px] w-[200px] self-center overflow-hidden rounded-full sm:self-start">
         <Image
           src="/images/personalsitepic.png"
           alt="Randy Kim in Mexico"
