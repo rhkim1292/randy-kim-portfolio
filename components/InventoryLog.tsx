@@ -1,12 +1,63 @@
 "use client";
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import ReactMarkdown, { type Components } from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import {
   projectItems,
   itemTypes,
   type ItemType,
   type Rarity,
 } from "@/data/projects";
+
+const designDocMarkdownComponents: Components = {
+  p: ({ node, ...props }) => (
+    <p className="text-sm leading-relaxed text-editor-muted" {...props} />
+  ),
+  a: ({ node, ...props }) => (
+    <a
+      target="_blank"
+      rel="noreferrer"
+      className="text-editor-amber hover:underline"
+      {...props}
+    />
+  ),
+  strong: ({ node, ...props }) => (
+    <strong className="font-semibold text-editor-text" {...props} />
+  ),
+  em: ({ node, ...props }) => <em className="italic" {...props} />,
+  code: ({ node, ...props }) => (
+    <code
+      className="rounded bg-editor-line/40 px-1 py-0.5 font-mono text-[13px] text-editor-text"
+      {...props}
+    />
+  ),
+  ul: ({ node, ...props }) => (
+    <ul
+      className="list-disc space-y-1 pl-5 text-sm leading-relaxed text-editor-muted"
+      {...props}
+    />
+  ),
+  ol: ({ node, ...props }) => (
+    <ol
+      className="list-decimal space-y-1 pl-5 text-sm leading-relaxed text-editor-muted"
+      {...props}
+    />
+  ),
+  li: ({ node, ...props }) => <li {...props} />,
+  video: ({ node, className, ...props }) => (
+    <span className="my-2 block overflow-hidden rounded-md border border-editor-line">
+      <video
+        preload="metadata"
+        autoPlay
+        loop
+        playsInline
+        className="h-auto w-full"
+        {...props}
+      />
+    </span>
+  ),
+};
 
 const rarityBorder: Record<Rarity, string> = {
   common: "border-editor-line",
@@ -349,6 +400,27 @@ export default function InventoryLog() {
               {selected.description}
             </p>
 
+            {selected.designDoc && selected.designDoc.length > 0 && (
+              <div className="mt-2 text-center">
+                <button
+                  onClick={openExpanded}
+                  className="group relative inline-block px-3 py-1 font-mono text-xs text-editor-amber"
+                >
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute left-0 top-0 h-2.5 w-2.5 rounded-tl border-l-2 border-t-2 border-editor-amber/70 transition-transform duration-200 group-hover:-translate-x-1 group-hover:-translate-y-1"
+                  />
+                  <span className="inline-block transition-transform duration-200 group-hover:scale-110">
+                    Expand &amp; Read More
+                  </span>
+                  <span
+                    aria-hidden="true"
+                    className="pointer-events-none absolute bottom-0 right-0 h-2.5 w-2.5 rounded-br border-b-2 border-r-2 border-editor-amber/70 transition-transform duration-200 group-hover:translate-x-1 group-hover:translate-y-1"
+                  />
+                </button>
+              </div>
+            )}
+
             <div className="mt-4 flex flex-wrap gap-1.5">
               {selected.stack.map((tech) => (
                 <span
@@ -480,12 +552,13 @@ export default function InventoryLog() {
                     </h4>
                     <div className="mt-2 space-y-2">
                       {section.body.map((paragraph, i) => (
-                        <p
+                        <ReactMarkdown
                           key={i}
-                          className="text-sm leading-relaxed text-editor-muted"
+                          rehypePlugins={[rehypeRaw]}
+                          components={designDocMarkdownComponents}
                         >
                           {paragraph}
-                        </p>
+                        </ReactMarkdown>
                       ))}
                     </div>
                   </div>

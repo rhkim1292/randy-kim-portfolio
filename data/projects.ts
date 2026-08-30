@@ -14,7 +14,10 @@ export const itemTypes: { id: ItemType | "all"; label: string }[] = [
 
 export type DesignDocSection = {
   heading: string;
-  body: string[]; // one or more paragraphs (or manually-bulleted lines)
+  // One or more Markdown blocks (bold/italic/links/inline code/lists supported).
+  // Each string renders as its own Markdown block, so put a whole bulleted
+  // list ("- item\n- item") in a single string rather than one item per entry.
+  body: string[];
 };
 
 export type ProjectItem = {
@@ -58,27 +61,81 @@ export const projectItems: ProjectItem[] = [
       {
         heading: "Overview",
         body: [
-          "Replace with a longer summary of the project: the problem it solved, who it was for, and your role.",
+          "When I started working for ASTI, I noticed the company was spending much more than\
+          necessary to keep their website running. They were paying for a CMS that seemed\
+          overkill for the type of website they were hosting. I proposed to the owner I could\
+          save him $312/year by remaking the website and hosting it on vercel for free. All\
+          he would need to pay for is the domain name (at $46/year) and so I set out to replicate\
+          the existing website making it much more lightweight and modern in the process.",
         ],
       },
       {
         heading: "Features implemented",
         body: [
-          "Replace with specific features, one per line, e.g. product catalog with filtering.",
-          "Contact form with server-side email delivery via Resend.",
-          "Responsive layout tuned for mobile storefront browsing.",
+          `- **Hand-rolled image lightbox** — built from scratch with no library:\
+          Escape-to-close, backdrop-click dismissal, scroll locking, and proper listener\
+          cleanup, reused across the gallery and portfolio.`,
+          `- **Pinterest-style masonry gallery** — ~90 real project photos laid out with\
+          CSS Grid (\`grid-flow-dense\`), per-image span metadata driving variable tile\
+          sizes, and computed aspect ratios, no gallery library.`,
+          `- **Full contact/quote pipeline with file uploads** — validates ~60 allowed\
+          design-file types (.ai, .psd, .dwg, .indd, etc.), enforces size and file-count\
+          limits, and sends a styled HTML email via Resend with attachments and \`replyTo\`\
+          set to the customer.`,
+          `- **Config-driven navigation** — nav structure lives in one config object\
+          consumed by separate desktop/mobile/dropdown components, including a custom\
+          hover-delay hook and an accessible mobile drawer.`,
+          `- **Five dedicated product pages** — channel letters, cabinet signs, banners,\
+          LED signs, and interior signs, each with unique imagery and copy instead of\
+          one generic template.`,
+          `- **Custom carousel controls** — \`react-slick\` wrapped with custom\
+          play/pause and prev/next controls via an imperative ref API.`,
+          `<video src="/video/asti-carousel-demo.webm"></video>`,
+          `- **Performance and SEO polish** — \`next/image\` throughout with tuned\
+          quality levels, \`next/font/google\` with \`display: swap\`, per-page\
+          metadata, and Vercel Analytics/Speed Insights wired in.`,
+          `- **Data-driven content** — gallery, portfolio, and product content are\
+          structured arrays rather than hardcoded markup, so new projects can be added\
+          without touching layout code.`,
         ],
       },
       {
         heading: "Technical notes",
         body: [
-          "Replace with architecture/stack decisions worth calling out, and why you made them.",
+          `- **Next.js App Router over Pages Router / a static site generator** — \
+          server-rendered React with file-based routing gets SEO-friendly pages\
+          (metadata API, server components) and API routes in one framework, no\
+          separate backend needed for the contact form. For a marketing site where\
+          most content is static but one dynamic endpoint (email + file upload) is\
+          needed, App Router's Route Handlers avoid standing up Express or serverless\
+          functions elsewhere.`,
+          `- **No CMS — content lives as JS data structures in the codebase** —\
+          \`package.json\` has zero CMS dependencies (no Sanity, Contentful, MDX);\
+          gallery/portfolio/product content is hardcoded arrays of objects. **Why**:\
+          this is a small, infrequently-updated business site — a CMS adds hosting\
+          cost, an admin UI to maintain, and a runtime dependency for content that\
+          changes maybe a few times a year. Content-as-code means new sign photos\
+          ship through the same git workflow as everything else, get type/lint-checked,\
+          and cost nothing extra to host.`,
+          `- **Resend for email instead of a form-as-a-service\
+          (Formspree, Netlify Forms)** — **Why**: form services are fine for a plain\
+          contact field, but this form needs file attachments (design files up to 10MB,\
+          5 files) forwarded to the business's inbox with the customer set as\
+          \`replyTo\`. Resend's API plus a Next.js Route Handler gives full control over\
+          validation, attachment handling, and email formatting — something most\
+          forms-as-a-service either can't do or charge extra for.`,
         ],
       },
       {
         heading: "Challenges",
         body: [
-          "Replace with a notable problem you hit and how you solved it.",
+          `- **Email spam bots** — When the email form was first implemented, a lot of\
+          spam submissions were coming through. After doing some research on how to\
+          combat the bots, a commonly used solution was to hide an input field that would\
+          prevent submission if filled out. Bots would fill this input field out whereas\
+          there was no way humans would be able to. This technique is called the\
+          honeypot input field. After implementing this to the ASTI email form, most\
+          if not all spam emails have been impeded from submission.`,
         ],
       },
     ],
