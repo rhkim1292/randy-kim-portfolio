@@ -5,7 +5,7 @@ import { FaLinkedin } from "react-icons/fa";
 export default function Hero() {
   return (
     <div className="flex justify-center content-center border-b border-editor-line px-4 py-12 sm:px-6 sm:py-16">
-      <div className="basis-2/3">
+      <div className="basis-2/3 content-center">
         <p className="font-mono text-sm text-editor-muted">
           <span className="text-editor-violet">01</span> import {"{"} you {"}"}{" "}
           from &quot;self&quot;;
@@ -19,7 +19,7 @@ export default function Hero() {
 
         <p className="mt-4 max-w-xl text-sm leading-relaxed text-editor-muted sm:text-base">
           I design and build gameplay systems in Unreal Engine, C++ game
-          engines, as well as websites like the one you're on right now.
+          engines, as well as websites like this one.
         </p>
 
         <div className="mt-6 flex flex-wrap gap-4 font-mono text-sm">

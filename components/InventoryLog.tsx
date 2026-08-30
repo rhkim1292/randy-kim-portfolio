@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import {
   projectItems,
   itemTypes,
@@ -29,6 +29,50 @@ const rarityText: Record<Rarity, string> = {
   legendary: "text-editor-amber",
 };
 
+// Appends a #t=<seconds> media fragment so a paused, non-autoplaying video
+// displays that frame instead of the (often blank) first frame.
+function videoSrc(src: string, previewTime?: number) {
+  return previewTime ? `${src}#t=${previewTime}` : src;
+}
+
+function MaximizeIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4"
+      aria-hidden="true"
+    >
+      <path d="M8 3H5a2 2 0 0 0-2 2v3" />
+      <path d="M21 8V5a2 2 0 0 0-2-2h-3" />
+      <path d="M3 16v3a2 2 0 0 0 2 2h3" />
+      <path d="M16 21h3a2 2 0 0 0 2-2v-3" />
+    </svg>
+  );
+}
+
+function CloseIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4"
+      aria-hidden="true"
+    >
+      <path d="M18 6 6 18" />
+      <path d="m6 6 12 12" />
+    </svg>
+  );
+}
+
 export default function InventoryLog() {
   const [filter, setFilter] = useState<ItemType | "all">("all");
   const visible =
@@ -36,17 +80,132 @@ export default function InventoryLog() {
       ? projectItems
       : projectItems.filter((i) => i.type === filter);
   const [selectedId, setSelectedId] = useState(visible[0]?.id);
-  const selected =
-    projectItems.find((i) => i.id === selectedId) ?? visible[0];
+  const selected = projectItems.find((i) => i.id === selectedId) ?? visible[0];
+  const [expanded, setExpanded] = useState(false);
+  const [closing, setClosing] = useState(false);
+  const [backdropVisible, setBackdropVisible] = useState(false);
+  const [sourceRect, setSourceRect] = useState<{
+    top: number;
+    left: number;
+    width: number;
+    height: number;
+  } | null>(null);
+  const detailPanelRef = useRef<HTMLDivElement>(null);
+  const frameRef = useRef<HTMLDivElement>(null);
+
+  function resetExpand() {
+    setExpanded(false);
+    setClosing(false);
+    setBackdropVisible(false);
+    setSourceRect(null);
+  }
 
   function selectFilter(next: ItemType | "all") {
     setFilter(next);
+    resetExpand();
     const firstOfNext =
       next === "all"
         ? projectItems[0]
         : projectItems.find((i) => i.type === next);
     if (firstOfNext) setSelectedId(firstOfNext.id);
   }
+
+  function selectItem(id: string) {
+    setSelectedId(id);
+    resetExpand();
+  }
+
+  function openExpanded() {
+    const rect = detailPanelRef.current?.getBoundingClientRect();
+    setSourceRect(
+      rect
+        ? { top: rect.top, left: rect.left, width: rect.width, height: rect.height }
+        : null,
+    );
+    setClosing(false);
+    setExpanded(true);
+  }
+
+  function closeExpanded() {
+    const rect = detailPanelRef.current?.getBoundingClientRect();
+    if (rect) {
+      setSourceRect({ top: rect.top, left: rect.left, width: rect.width, height: rect.height });
+    }
+    setBackdropVisible(false);
+    setClosing(true);
+  }
+
+  function handleFrameTransitionEnd(e: React.TransitionEvent<HTMLDivElement>) {
+    if (e.propertyName !== "transform") return;
+    if (closing) resetExpand();
+  }
+
+  // FLIP animation: measure the overlay's natural ("last") position, then
+  // imperatively set its transform so it visually starts at the detail
+  // panel's rect (opening) or animate back down to it (closing).
+  useLayoutEffect(() => {
+    if (!expanded || !sourceRect || !frameRef.current) return;
+    const target = frameRef.current.getBoundingClientRect();
+    const scaleX = sourceRect.width / target.width;
+    const scaleY = sourceRect.height / target.height;
+    const translateX =
+      sourceRect.left + sourceRect.width / 2 - (target.left + target.width / 2);
+    const translateY =
+      sourceRect.top + sourceRect.height / 2 - (target.top + target.height / 2);
+    const collapsed = `translate(${translateX}px, ${translateY}px) scale(${scaleX}, ${scaleY})`;
+
+    if (!closing) {
+      frameRef.current.style.transition = "none";
+      frameRef.current.style.transform = collapsed;
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          if (!frameRef.current) return;
+          frameRef.current.style.transition =
+            "transform 320ms cubic-bezier(0.22, 1, 0.36, 1)";
+          frameRef.current.style.transform = "translate(0, 0) scale(1, 1)";
+        });
+      });
+    } else {
+      frameRef.current.style.transition =
+        "transform 280ms cubic-bezier(0.4, 0, 1, 1)";
+      frameRef.current.style.transform = collapsed;
+    }
+  }, [expanded, closing, sourceRect]);
+
+  // Fade the backdrop in shortly after the frame starts expanding (a
+  // separate concern from the frame/content, which stay at full opacity
+  // throughout so the panel-to-overlay swap never flashes).
+  useEffect(() => {
+    if (!expanded || closing) return;
+    const raf = requestAnimationFrame(() => setBackdropVisible(true));
+    return () => cancelAnimationFrame(raf);
+  }, [expanded, closing]);
+
+  useEffect(() => {
+    if (!expanded) return;
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") closeExpanded();
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [expanded]);
+
+  // Lock page scroll while the overlay is open (through the close
+  // animation too), compensating for the scrollbar's width so the page
+  // doesn't nudge sideways when it disappears.
+  useEffect(() => {
+    if (!expanded) return;
+    const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+    const { overflow, paddingRight } = document.body.style;
+    document.body.style.overflow = "hidden";
+    if (scrollbarWidth > 0) {
+      document.body.style.paddingRight = `${scrollbarWidth}px`;
+    }
+    return () => {
+      document.body.style.overflow = overflow;
+      document.body.style.paddingRight = paddingRight;
+    };
+  }, [expanded]);
 
   return (
     <div className="p-4 sm:p-6">
@@ -86,23 +245,44 @@ export default function InventoryLog() {
               <button
                 key={item.id}
                 role="listitem"
-                onClick={() => setSelectedId(item.id)}
+                onClick={() => selectItem(item.id)}
                 aria-pressed={isSelected}
                 title={item.name}
-                className={`flex aspect-square flex-col items-center justify-center rounded-lg border-2 bg-editor-panel p-2 text-center transition-transform hover:-translate-y-0.5 ${
+                className={`relative flex aspect-square flex-col items-center justify-center overflow-hidden rounded-lg border-2 bg-editor-panel p-2 text-center transition-transform hover:-translate-y-0.5 ${
                   rarityBorder[item.rarity]
                 } ${isSelected ? rarityGlow[item.rarity] : ""} ${
                   isSelected ? "ring-1 ring-editor-text/30" : ""
                 }`}
               >
-                <span
-                  className={`font-mono text-[10px] uppercase tracking-wide ${rarityText[item.rarity]}`}
-                >
-                  {item.rarity}
-                </span>
-                <span className="mt-1 line-clamp-3 font-mono text-[11px] leading-tight text-editor-text">
-                  {item.name}
-                </span>
+                {item.video && (
+                  <>
+                    <video
+                      src={videoSrc(item.video)}
+                      preload="metadata"
+                      autoPlay
+                      loop
+                      muted
+                      playsInline
+                      aria-hidden="true"
+                      className="absolute inset-0 h-full w-full object-cover opacity-10"
+                    />
+                    {/* scrim keeps rarity/name text legible no matter how bright the source clip is */}
+                    <div
+                      className="absolute inset-0 bg-editor-panel/40"
+                      aria-hidden="true"
+                    />
+                  </>
+                )}
+                <div className="relative z-10 flex flex-col items-center">
+                  <span
+                    className={`font-mono text-[10px] uppercase tracking-wide ${rarityText[item.rarity]}`}
+                  >
+                    {item.rarity}
+                  </span>
+                  <span className="mt-1 line-clamp-3 font-mono text-[11px] leading-tight text-editor-text">
+                    {item.name}
+                  </span>
+                </div>
               </button>
             );
           })}
@@ -116,8 +296,36 @@ export default function InventoryLog() {
         {/* Detail panel */}
         {selected && (
           <div
-            className={`rounded-lg border-2 bg-editor-panel p-5 ${rarityBorder[selected.rarity]}`}
+            ref={detailPanelRef}
+            aria-hidden={expanded}
+            className={`relative rounded-lg border-2 bg-editor-panel p-6 ${rarityBorder[selected.rarity]} ${
+              expanded ? "invisible" : ""
+            }`}
           >
+            {selected.designDoc && selected.designDoc.length > 0 && (
+              <button
+                onClick={openExpanded}
+                title="Expand full design doc"
+                aria-label="Expand full design doc"
+                className="absolute right-1 top-1 z-10 flex h-5 w-5 items-center justify-center rounded border border-editor-line text-editor-muted transition-colors hover:border-editor-amber/70 hover:text-editor-amber"
+              >
+                <MaximizeIcon />
+              </button>
+            )}
+            {selected.video && (
+              <div className="mb-4 overflow-hidden rounded-md border border-editor-line">
+                <video
+                  key={selected.video}
+                  src={videoSrc(selected.video, selected.previewTime)}
+                  poster={selected.poster}
+                  preload="metadata"
+                  controls
+                  playsInline
+                  aria-label={`${selected.name} preview`}
+                  className="aspect-video w-full object-cover"
+                />
+              </div>
+            )}
             <div className="flex items-start justify-between gap-3">
               <div>
                 <h3 className="font-mono text-lg text-editor-text">
@@ -179,6 +387,150 @@ export default function InventoryLog() {
           </div>
         )}
       </div>
+
+      {/* Full-screen design doc overlay */}
+      {expanded && selected && selected.designDoc && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-8"
+          onClick={closeExpanded}
+        >
+          <div
+            aria-hidden="true"
+            className={`absolute inset-0 bg-black/70 transition-opacity duration-300 ${
+              backdropVisible ? "opacity-100" : "opacity-0"
+            }`}
+          />
+          <div
+            ref={frameRef}
+            onTransitionEnd={handleFrameTransitionEnd}
+            role="dialog"
+            aria-modal="true"
+            aria-label={`${selected.name} design doc`}
+            onClick={(e) => e.stopPropagation()}
+            className={`relative flex max-h-full w-full max-w-3xl flex-col overflow-hidden rounded-lg border-2 bg-editor-panel ${rarityBorder[selected.rarity]}`}
+          >
+            <button
+              onClick={closeExpanded}
+              title="Close"
+              aria-label="Close design doc"
+              className="absolute right-3 top-3 z-10 flex h-6 w-6 items-center justify-center rounded border border-editor-line bg-editor-panel/90 text-editor-muted transition-colors hover:border-editor-amber/70 hover:text-editor-amber"
+            >
+              <span
+                aria-hidden="true"
+                className={`absolute inset-0 flex items-center justify-center transition-all duration-[280ms] ease-out ${
+                  closing ? "rotate-90 scale-50 opacity-0" : "rotate-0 scale-100 opacity-100"
+                }`}
+              >
+                <CloseIcon />
+              </span>
+              <span
+                aria-hidden="true"
+                className={`absolute inset-0 flex items-center justify-center transition-all duration-[280ms] ease-out ${
+                  closing ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-50 opacity-0"
+                }`}
+              >
+                <MaximizeIcon />
+              </span>
+            </button>
+
+            <div className="overflow-y-auto p-10">
+              {selected.video && (
+                <div className="mb-5 overflow-hidden rounded-md border border-editor-line">
+                  <video
+                    key={selected.video}
+                    src={videoSrc(selected.video, selected.previewTime)}
+                    poster={selected.poster}
+                    preload="metadata"
+                    controls
+                    playsInline
+                    aria-label={`${selected.name} preview`}
+                    className="aspect-video w-full object-cover"
+                  />
+                </div>
+              )}
+
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <h3 className="font-mono text-xl text-editor-text">
+                    {selected.name}
+                  </h3>
+                  {selected.subtitle && (
+                    <p className="mt-0.5 text-sm text-editor-muted">
+                      {selected.subtitle}
+                      {selected.period ? ` · ${selected.period}` : ""}
+                    </p>
+                  )}
+                </div>
+                <span
+                  className={`shrink-0 rounded border px-2 py-0.5 font-mono text-[11px] uppercase tracking-wide ${rarityBorder[selected.rarity]} ${rarityText[selected.rarity]}`}
+                >
+                  {selected.rarity}
+                </span>
+              </div>
+
+              <p className="mt-4 text-sm leading-relaxed text-editor-muted">
+                {selected.description}
+              </p>
+
+              <div className="mt-6 space-y-6">
+                {selected.designDoc.map((section) => (
+                  <div key={section.heading}>
+                    <h4 className="font-mono text-sm uppercase tracking-wide text-editor-amber">
+                      {section.heading}
+                    </h4>
+                    <div className="mt-2 space-y-2">
+                      {section.body.map((paragraph, i) => (
+                        <p
+                          key={i}
+                          className="text-sm leading-relaxed text-editor-muted"
+                        >
+                          {paragraph}
+                        </p>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-6 flex flex-wrap gap-1.5">
+                {selected.stack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded border border-editor-line px-1.5 py-0.5 font-mono text-[11px] text-editor-muted"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              {(selected.href || selected.repo) && (
+                <div className="mt-5 flex gap-4 border-t border-editor-line pt-3 font-mono text-xs">
+                  {selected.href && (
+                    <a
+                      href={selected.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-editor-amber hover:underline"
+                    >
+                      live →
+                    </a>
+                  )}
+                  {selected.repo && (
+                    <a
+                      href={selected.repo}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-editor-muted hover:text-editor-text hover:underline"
+                    >
+                      source →
+                    </a>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
