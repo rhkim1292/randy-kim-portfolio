@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 const navItems = [
   { href: "/", label: "overview", file: "tsx" },
   { href: "/projects", label: "projects", file: "log" },
-  { href: "/talents", label: "talents", file: "tree" },
+  // { href: "/talents", label: "talents", file: "tree" },
 ];
 
 export default function GameNav() {
