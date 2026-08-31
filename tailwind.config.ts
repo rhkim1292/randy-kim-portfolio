@@ -30,9 +30,19 @@ const config: Config = {
           "0%, 49%": { opacity: "1" },
           "50%, 100%": { opacity: "0" },
         },
+        sparkle: {
+          "0%, 100%": { opacity: "0", transform: "scale(0.4) rotate(0deg)" },
+          "50%": { opacity: "1", transform: "scale(1) rotate(20deg)" },
+        },
+        "glow-shimmer": {
+          "0%, 100%": { boxShadow: "0 0 18px -6px var(--tw-shadow-color)" },
+          "50%": { boxShadow: "0 0 36px -2px var(--tw-shadow-color)" },
+        },
       },
       animation: {
         blink: "blink 1s step-end infinite",
+        sparkle: "sparkle 1.1s ease-in-out infinite",
+        "glow-shimmer": "glow-shimmer 1.6s ease-in-out infinite",
       },
     },
   },

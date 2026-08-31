@@ -3,6 +3,7 @@
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import ReactMarkdown, { type Components } from "react-markdown";
 import rehypeRaw from "rehype-raw";
+import remarkGfm from "remark-gfm";
 import {
   projectItems,
   itemTypes,
@@ -26,9 +27,59 @@ const designDocMarkdownComponents: Components = {
     <strong className="font-semibold text-editor-text" {...props} />
   ),
   em: ({ node, ...props }) => <em className="italic" {...props} />,
-  code: ({ node, ...props }) => (
-    <code
-      className="rounded bg-editor-line/40 px-1 py-0.5 font-mono text-[13px] text-editor-text"
+  code: ({ node, className, children, ...props }) => {
+    const isBlock = String(children).includes("\n");
+    if (isBlock) {
+      return (
+        <code
+          className="block whitespace-pre font-mono text-[13px] text-editor-text"
+          {...props}
+        >
+          {children}
+        </code>
+      );
+    }
+    return (
+      <code
+        className="rounded bg-editor-line/40 px-1 py-0.5 font-mono text-[13px] text-editor-text"
+        {...props}
+      >
+        {children}
+      </code>
+    );
+  },
+  pre: ({ node, ...props }) => (
+    <pre
+      className="overflow-x-auto rounded-md border border-editor-line bg-editor-line/20 p-3"
+      {...props}
+    />
+  ),
+  h3: ({ node, ...props }) => (
+    <h5
+      className="mt-4 font-mono text-xs uppercase tracking-wide text-editor-teal"
+      {...props}
+    />
+  ),
+  table: ({ node, ...props }) => (
+    <div className="overflow-x-auto rounded-md border border-editor-line">
+      <table className="w-full border-collapse text-sm" {...props} />
+    </div>
+  ),
+  thead: ({ node, ...props }) => (
+    <thead className="bg-editor-line/30" {...props} />
+  ),
+  tr: ({ node, ...props }) => (
+    <tr className="border-b border-editor-line last:border-0" {...props} />
+  ),
+  th: ({ node, ...props }) => (
+    <th
+      className="px-3 py-1.5 text-left font-mono text-xs uppercase tracking-wide text-editor-amber"
+      {...props}
+    />
+  ),
+  td: ({ node, ...props }) => (
+    <td
+      className="px-3 py-1.5 align-top leading-relaxed text-editor-muted"
       {...props}
     />
   ),
@@ -68,9 +119,19 @@ const rarityBorder: Record<Rarity, string> = {
 
 const rarityGlow: Record<Rarity, string> = {
   common: "",
-  rare: "shadow-[0_0_16px_-6px] shadow-editor-teal/50",
-  epic: "shadow-[0_0_16px_-6px] shadow-editor-violet/50",
-  legendary: "shadow-[0_0_20px_-6px] shadow-editor-amber/60",
+  rare: "shadow-[0_0_24px_-4px] shadow-editor-teal/80",
+  epic: "shadow-[0_0_24px_-4px] shadow-editor-violet/80",
+  legendary: "shadow-[0_0_28px_-4px] shadow-editor-amber/90",
+};
+
+// The shimmer keyframes (see tailwind.config.ts) read the shadow's color
+// from `var(--tw-shadow-color)`, so these only need to set that color and
+// turn the animation on — the shape itself is driven by the keyframes.
+const rarityHoverGlow: Record<Rarity, string> = {
+  common: "",
+  rare: "hover:shadow-editor-teal/90 hover:animate-glow-shimmer",
+  epic: "hover:shadow-editor-violet/90 hover:animate-glow-shimmer",
+  legendary: "hover:shadow-editor-amber hover:animate-glow-shimmer",
 };
 
 const rarityText: Record<Rarity, string> = {
@@ -124,6 +185,53 @@ function CloseIcon() {
   );
 }
 
+function ChevronLeftIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4"
+      aria-hidden="true"
+    >
+      <path d="m15 18-6-6 6-6" />
+    </svg>
+  );
+}
+
+function ChevronRightIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4"
+      aria-hidden="true"
+    >
+      <path d="m9 18 6-6-6-6" />
+    </svg>
+  );
+}
+
+function SparkleIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden="true"
+    >
+      <path d="M12 0c0 6.075 4.925 11 11 11-6.075 0-11 4.925-11 11 0-6.075-4.925-11-11-11 6.075 0 11-4.925 11-11z" />
+    </svg>
+  );
+}
+
 export default function InventoryLog() {
   const [filter, setFilter] = useState<ItemType | "all">("all");
   const visible =
@@ -158,6 +266,14 @@ export default function InventoryLog() {
   } | null>(null);
   const detailPanelRef = useRef<HTMLDivElement>(null);
   const frameRef = useRef<HTMLDivElement>(null);
+  const itemScrollRef = useRef<HTMLDivElement>(null);
+
+  function scrollItems(direction: -1 | 1) {
+    itemScrollRef.current?.scrollBy({
+      left: direction * itemScrollRef.current.clientWidth * 0.8,
+      behavior: "smooth",
+    });
+  }
 
   function resetExpand() {
     setExpanded(false);
@@ -233,7 +349,7 @@ export default function InventoryLog() {
       });
     } else {
       frameRef.current.style.transition =
-        "transform 280ms cubic-bezier(0.4, 0, 1, 1)";
+        "transform 200ms cubic-bezier(0.4, 0, 1, 1)";
       frameRef.current.style.transform = collapsed;
     }
   }, [expanded, closing, sourceRect]);
@@ -298,68 +414,101 @@ export default function InventoryLog() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.3fr]">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[1fr_1.3fr]">
         {/* Item slot grid */}
-        <div
-          className="flex gap-2 overflow-x-auto pb-2 lg:grid lg:grid-cols-4 lg:content-start lg:pb-0"
-          role="list"
-          aria-label="Inventory items"
-        >
-          {visible.map((item) => {
-            const isSelected = item.id === selected?.id;
-            return (
-              <button
-                key={item.id}
+        <div className="group/scroll relative">
+          <div
+            ref={itemScrollRef}
+            className="pointer-events-none flex gap-2 overflow-hidden p-10 -m-10 lg:grid lg:grid-cols-4 lg:content-start lg:overflow-visible lg:p-0 lg:m-0"
+            role="list"
+            aria-label="Inventory items"
+          >
+            {visible.map((item) => {
+              const isSelected = item.id === selected?.id;
+              return (
+                <button
+                  key={item.id}
+                  role="listitem"
+                  onClick={() => selectItem(item.id)}
+                  aria-pressed={isSelected}
+                  title={item.name}
+                  className={`group pointer-events-auto relative flex aspect-square w-24 shrink-0 flex-col items-center justify-center overflow-hidden rounded-lg border-2 bg-editor-panel p-2 text-center transition-shadow duration-200 sm:w-28 lg:w-auto ${
+                    rarityBorder[item.rarity]
+                  } ${rarityHoverGlow[item.rarity]} ${
+                    isSelected ? rarityGlow[item.rarity] : ""
+                  } ${isSelected ? "ring-1 ring-editor-text/30" : ""}`}
+                >
+                  {item.rarity !== "common" && (
+                    <>
+                      <SparkleIcon
+                        className={`absolute left-2 top-2 z-10 h-3 w-3 opacity-0 group-hover:animate-sparkle ${rarityText[item.rarity]}`}
+                      />
+                      <SparkleIcon
+                        className={`absolute right-3 top-4 z-10 h-2 w-2 opacity-0 group-hover:animate-sparkle group-hover:[animation-delay:250ms] ${rarityText[item.rarity]}`}
+                      />
+                      <SparkleIcon
+                        className={`absolute bottom-3 right-2 z-10 h-2.5 w-2.5 opacity-0 group-hover:animate-sparkle group-hover:[animation-delay:550ms] ${rarityText[item.rarity]}`}
+                      />
+                    </>
+                  )}
+                  {item.video && (
+                    <>
+                      <video
+                        src={videoSrc(item.video)}
+                        preload="metadata"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        aria-hidden="true"
+                        className="absolute inset-0 h-full w-full object-cover opacity-10"
+                      />
+                      {/* scrim keeps rarity/name text legible no matter how bright the source clip is */}
+                      <div
+                        className="absolute inset-0 bg-editor-panel/40"
+                        aria-hidden="true"
+                      />
+                    </>
+                  )}
+                  <div className="relative z-10 flex flex-col items-center">
+                    <span
+                      className={`font-mono text-[10px] uppercase tracking-wide ${rarityText[item.rarity]}`}
+                    >
+                      {item.rarity}
+                    </span>
+                    <span className="mt-1 line-clamp-3 font-mono text-[11px] leading-tight text-editor-text">
+                      {item.name}
+                    </span>
+                  </div>
+                </button>
+              );
+            })}
+            {Array.from({ length: emptySlotCount }).map((_, i) => (
+              <div
+                key={`empty-${i}`}
                 role="listitem"
-                onClick={() => selectItem(item.id)}
-                aria-pressed={isSelected}
-                title={item.name}
-                className={`relative flex aspect-square w-24 shrink-0 flex-col items-center justify-center overflow-hidden rounded-lg border-2 bg-editor-panel p-2 text-center transition-transform hover:-translate-y-0.5 sm:w-28 lg:w-auto ${
-                  rarityBorder[item.rarity]
-                } ${isSelected ? rarityGlow[item.rarity] : ""} ${
-                  isSelected ? "ring-1 ring-editor-text/30" : ""
-                }`}
-              >
-                {item.video && (
-                  <>
-                    <video
-                      src={videoSrc(item.video)}
-                      preload="metadata"
-                      autoPlay
-                      loop
-                      muted
-                      playsInline
-                      aria-hidden="true"
-                      className="absolute inset-0 h-full w-full object-cover opacity-10"
-                    />
-                    {/* scrim keeps rarity/name text legible no matter how bright the source clip is */}
-                    <div
-                      className="absolute inset-0 bg-editor-panel/40"
-                      aria-hidden="true"
-                    />
-                  </>
-                )}
-                <div className="relative z-10 flex flex-col items-center">
-                  <span
-                    className={`font-mono text-[10px] uppercase tracking-wide ${rarityText[item.rarity]}`}
-                  >
-                    {item.rarity}
-                  </span>
-                  <span className="mt-1 line-clamp-3 font-mono text-[11px] leading-tight text-editor-text">
-                    {item.name}
-                  </span>
-                </div>
-              </button>
-            );
-          })}
-          {Array.from({ length: emptySlotCount }).map((_, i) => (
-            <div
-              key={`empty-${i}`}
-              role="listitem"
-              aria-hidden="true"
-              className="aspect-square w-24 shrink-0 rounded-lg border-2 border-dashed border-editor-line/30 bg-editor-panel/40 sm:w-28 lg:w-auto"
-            />
-          ))}
+                aria-hidden="true"
+                className="aspect-square w-24 shrink-0 rounded-lg border-2 border-dashed border-editor-line/30 bg-editor-panel/40 sm:w-28 lg:w-auto"
+              />
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => scrollItems(-1)}
+            aria-label="Scroll inventory left"
+            className="absolute left-[-6px] top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-editor-line bg-editor-panel/90 text-editor-muted opacity-0 transition duration-200 hover:border-editor-amber/70 hover:text-editor-amber group-hover/scroll:opacity-100 lg:hidden"
+          >
+            <ChevronLeftIcon />
+          </button>
+          <button
+            type="button"
+            onClick={() => scrollItems(1)}
+            aria-label="Scroll inventory right"
+            className="absolute right-[-6px] top-1/2 z-20 flex h-8 w-8 -translate-y-1/2 items-center justify-center rounded-full border border-editor-line bg-editor-panel/90 text-editor-muted opacity-0 transition duration-200 hover:border-editor-amber/70 hover:text-editor-amber group-hover/scroll:opacity-100 lg:hidden"
+          >
+            <ChevronRightIcon />
+          </button>
         </div>
 
         {/* Detail panel */}
@@ -389,6 +538,7 @@ export default function InventoryLog() {
                   poster={selected.poster}
                   preload="metadata"
                   controls
+                  loop
                   playsInline
                   aria-label={`${selected.name} preview`}
                   className="aspect-video w-full object-cover"
@@ -507,7 +657,7 @@ export default function InventoryLog() {
             >
               <span
                 aria-hidden="true"
-                className={`absolute inset-0 flex items-center justify-center transition-all duration-[280ms] ease-out ${
+                className={`absolute inset-0 flex items-center justify-center transition-all duration-[200ms] ease-out ${
                   closing ? "rotate-90 scale-50 opacity-0" : "rotate-0 scale-100 opacity-100"
                 }`}
               >
@@ -515,7 +665,7 @@ export default function InventoryLog() {
               </span>
               <span
                 aria-hidden="true"
-                className={`absolute inset-0 flex items-center justify-center transition-all duration-[280ms] ease-out ${
+                className={`absolute inset-0 flex items-center justify-center transition-all duration-[200ms] ease-out ${
                   closing ? "rotate-0 scale-100 opacity-100" : "-rotate-90 scale-50 opacity-0"
                 }`}
               >
@@ -532,6 +682,7 @@ export default function InventoryLog() {
                     poster={selected.poster}
                     preload="metadata"
                     controls
+                    loop
                     playsInline
                     aria-label={`${selected.name} preview`}
                     className="aspect-video w-full object-cover"
@@ -572,6 +723,7 @@ export default function InventoryLog() {
                       {section.body.map((paragraph, i) => (
                         <ReactMarkdown
                           key={i}
+                          remarkPlugins={[remarkGfm]}
                           rehypePlugins={[rehypeRaw]}
                           components={designDocMarkdownComponents}
                         >
