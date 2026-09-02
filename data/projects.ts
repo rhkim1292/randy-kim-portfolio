@@ -54,6 +54,7 @@ export const projectItems: ProjectItem[] = [
     stack: ["Next.js", "Tailwind CSS", "Lucide React", "Vercel", "Resend"],
     status: "shipped",
     href: "https://www.advancedsigntech.com/",
+    repo: "https://github.com/rhkim1292/Scale2D",
     video: "/video/asti-demo.webm",
     poster: "/video/posters/asti-demo-poster.png",
     designDoc: [
