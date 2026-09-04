@@ -11,6 +11,7 @@
 # misc
 .DS_Store
 *.pem
+spotify-client-id-secret.txt
 
 # debug
 npm-debug.log*
@@ -18,7 +19,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-.env*.local
+.env
+.env*
+!.env.example
 
 # vercel
 .vercel
