@@ -4,6 +4,8 @@ import "./globals.css";
 import EditorChrome from "@/components/EditorChrome";
 import GameNav from "@/components/GameNav";
 import Terminal from "@/components/Terminal";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const mono = JetBrains_Mono({
   subsets: ["latin"],
@@ -19,8 +21,7 @@ const sans = Inter({
 
 export const metadata: Metadata = {
   title: "Randy Kim's Personal Site",
-  description:
-    "Portfolio of software projects across web and games.",
+  description: "Portfolio of software projects across web and games.",
 };
 
 export default function RootLayout({
@@ -35,12 +36,12 @@ export default function RootLayout({
           <div className="mt-6 flex flex-col flex-1 overflow-hidden rounded-xl border border-editor-line shadow-2xl shadow-black/40 sm:mt-10 sm:mb-10">
             <EditorChrome />
             <GameNav />
-            <div className="flex flex-1 flex-col">
-              {children}
-            </div>
+            <div className="flex flex-1 flex-col">{children}</div>
             <Terminal />
           </div>
         </main>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
