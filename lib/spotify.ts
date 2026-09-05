@@ -130,10 +130,137 @@ export type FetchMode = "no-store" | { revalidate: number };
 //    not a failure — the caller decides what to do about it.
 // 5. If !res.ok for any other reason: log res.status, return null.
 // 6. Otherwise: return (await res.json()) as T.
-async function spotifyGet<T>(
+export async function spotifyGet<T>(
   path: string,
   mode: FetchMode,
   retryOn401 = true,
 ): Promise<T | null> {
+  try {
+    const accessToken = await getAccessToken();
+    if (!accessToken) return null;
+
+    const res = await fetch(
+      `${API_BASE}${path}`,
+      mode === "no-store"
+        ? {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+            cache: "no-store",
+            signal: AbortSignal.timeout(TIMEOUT_MS),
+          }
+        : {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+            next: { revalidate: mode.revalidate },
+            signal: AbortSignal.timeout(TIMEOUT_MS),
+          },
+    );
+
+    if (res.status === 401 && retryOn401) {
+      cachedToken = null;
+      return await spotifyGet(path, mode, false);
+    }
+
+    if (res.status === 204) return null;
+
+    if (!res.ok) {
+      console.log(res.status);
+      return null;
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Promise rejected with error: " + error);
+    return null;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Normalizers — pure functions, no fetch, no process.env. These are the only
+// pieces of this file worth unit-testing: given the same input JSON, they
+// always produce the same output, and several of their branches (a playing
+// ad, a null item, an empty history, a malformed URL) can't be triggered on
+// demand against the live API. Exported so lib/spotify.test.ts can import
+// them directly.
+
+type SpotifyImage = { url: string; width: number | null; height: number | null };
+
+// TODO: pickImage() — your turn.
+//
+// Spotify returns album images LARGEST FIRST. Sort ascending by width, then
+// return the url of the smallest image that is still >= 200px wide. If none
+// are >= 200px (e.g. only a 64px thumbnail exists), fall back to the largest
+// available instead of returning null. Return null only when the array is
+// empty.
+export function pickImage(images: SpotifyImage[]): string | null {
+  throw new Error("not implemented");
+}
+
+// TODO: safeSpotifyUrl() — your turn.
+//
+// external_urls.spotify gets rendered straight into an <a href>. React
+// escapes text content but does NOT sanitize URL schemes, so this is the one
+// line of defense against something like "javascript:alert(1)" ending up in
+// an href. Accept the value only if it's a valid URL whose scheme is
+// "https:" and whose host is exactly "open.spotify.com" — anything else
+// (wrong scheme, wrong host, missing/undefined input, or a string that
+// doesn't even parse as a URL) returns null. Must not throw on a malformed
+// string — the URL constructor throws on invalid input, so you'll need to
+// handle that.
+export function safeSpotifyUrl(url: string | null | undefined): string | null {
+  throw new Error("not implemented");
+}
+
+// TODO: normalizeCurrent() — your turn.
+//
+// Takes the parsed JSON body of GET /v1/me/player/currently-playing (a "200"
+// response) and returns the "playing"/"paused" arm of NowPlaying, or null
+// when the payload isn't a renderable music track — the caller falls back to
+// normalizeRecent() in that case. Return null when:
+//   - json.item is null (idle player, ad, or — since we never send
+//     additional_types — a podcast episode)
+//   - json.currently_playing_type is "ad" or "unknown"
+// Otherwise build the object from:
+//   - title:      json.item.name
+//   - artist:     json.item.artists.map(a => a.name).join(", ")
+//   - album:      json.item.album.name
+//   - imageUrl:   pickImage(json.item.album.images)
+//   - url:        safeSpotifyUrl(json.item.external_urls?.spotify)
+//   - durationMs: json.item.duration_ms
+//   - progressMs: json.progress_ms
+//   - status:     json.is_playing ? "playing" : "paused"
+//   - fetchedAt:  Date.now()
+export function normalizeCurrent(json: any): NowPlaying | null {
+  throw new Error("not implemented");
+}
+
+// TODO: normalizeRecent() — your turn.
+//
+// Takes the parsed JSON body of GET /v1/me/player/recently-played?limit=1
+// (shape: { items: [{ track, played_at }] }) and returns the "recent" arm of
+// NowPlaying, or null when json.items is empty (brand-new account — caller
+// treats that as fully unavailable, nothing left to fall back to).
+// Same field mapping as normalizeCurrent but reading from items[0].track
+// instead of json.item, status is always "recent", and progressMs is always
+// null (we don't know how far into the track the user got last time).
+export function normalizeRecent(json: any): NowPlaying | null {
+  throw new Error("not implemented");
+}
+
+// TODO: normalizeTopTracks() — your turn.
+//
+// Takes the parsed JSON body of GET /v1/me/top/tracks (shape:
+// { items: [...] }) and maps it to TopTrack[], preserving order. Empty
+// items => empty array, never throws. Per track:
+//   - id:       item.id
+//   - title:    item.name
+//   - artist:   item.artists.map(a => a.name).join(", ")
+//   - imageUrl: pickImage(item.album.images)
+//   - url:      safeSpotifyUrl(item.external_urls?.spotify)
+export function normalizeTopTracks(json: any): TopTrack[] {
   throw new Error("not implemented");
 }
