@@ -187,7 +187,11 @@ export async function spotifyGet<T>(
 // demand against the live API. Exported so lib/spotify.test.ts can import
 // them directly.
 
-type SpotifyImage = { url: string; width: number | null; height: number | null };
+type SpotifyImage = {
+  url: string;
+  width: number | null;
+  height: number | null;
+};
 
 // TODO: pickImage() — your turn.
 //
@@ -197,7 +201,26 @@ type SpotifyImage = { url: string; width: number | null; height: number | null }
 // available instead of returning null. Return null only when the array is
 // empty.
 export function pickImage(images: SpotifyImage[]): string | null {
-  throw new Error("not implemented");
+  if (images.length === 0) return null;
+  
+  const imageCompareFn = (a: SpotifyImage, b: SpotifyImage) => {
+    if (a.width === null || b.width === null) return 0;
+    return a.width - b.width;
+  };
+  images.sort(imageCompareFn);
+
+  let lastAcceptableImgIdx = 0;
+
+  for (let i = 0; i < images.length; i++) {
+    const width = images[i].width;
+    if (!width) continue;
+    if (width >= 200) {
+      return images[i].url;
+    }
+    lastAcceptableImgIdx = i;
+  }
+
+  return images[lastAcceptableImgIdx].url;
 }
 
 // TODO: safeSpotifyUrl() — your turn.
@@ -212,7 +235,10 @@ export function pickImage(images: SpotifyImage[]): string | null {
 // string — the URL constructor throws on invalid input, so you'll need to
 // handle that.
 export function safeSpotifyUrl(url: string | null | undefined): string | null {
-  throw new Error("not implemented");
+  if (url === null || url === undefined) return null;
+  if (url.slice(0, 25) !== "https://open.spotify.com/") return null;
+
+  return url;
 }
 
 // TODO: normalizeCurrent() — your turn.
@@ -235,7 +261,35 @@ export function safeSpotifyUrl(url: string | null | undefined): string | null {
 //   - status:     json.is_playing ? "playing" : "paused"
 //   - fetchedAt:  Date.now()
 export function normalizeCurrent(json: any): NowPlaying | null {
-  throw new Error("not implemented");
+  if (!json || !json.item) return null;
+  if (
+    json.currently_playing_type === "ad" ||
+    json.currently_playing_type === "unknown"
+  )
+    return null;
+  const status = json.is_playing ? "playing" : "paused";
+  const title = json.item.name;
+  const artist = json.item.artists.map((a: any) => a.name).join(", ");
+  const album = json.item.album.name;
+  const imageUrl = pickImage(json.item.album.images);
+  const url = safeSpotifyUrl(json.item.external_urls?.spotify);
+  const durationMs = json.item.duration_ms;
+  const progressMs = json.progress_ms;
+  const fetchedAt = Date.now();
+
+  const res: NowPlaying = {
+    status: status,
+    title: title,
+    artist: artist,
+    album: album, // used only for the truncation tooltip
+    imageUrl: imageUrl,
+    url: url, // external_urls.spotify
+    durationMs: durationMs,
+    progressMs: progressMs, // null when status === "recent"
+    fetchedAt: fetchedAt, // server epoch ms, debugging only
+  };
+
+  return res;
 }
 
 // TODO: normalizeRecent() — your turn.
