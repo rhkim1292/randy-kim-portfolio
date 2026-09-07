@@ -202,7 +202,7 @@ type SpotifyImage = {
 // empty.
 export function pickImage(images: SpotifyImage[]): string | null {
   if (images.length === 0) return null;
-  
+
   const imageCompareFn = (a: SpotifyImage, b: SpotifyImage) => {
     if (a.width === null || b.width === null) return 0;
     return a.width - b.width;
@@ -262,11 +262,13 @@ export function safeSpotifyUrl(url: string | null | undefined): string | null {
 //   - fetchedAt:  Date.now()
 export function normalizeCurrent(json: any): NowPlaying | null {
   if (!json || !json.item) return null;
+
   if (
     json.currently_playing_type === "ad" ||
     json.currently_playing_type === "unknown"
   )
     return null;
+
   const status = json.is_playing ? "playing" : "paused";
   const title = json.item.name;
   const artist = json.item.artists.map((a: any) => a.name).join(", ");
@@ -302,7 +304,25 @@ export function normalizeCurrent(json: any): NowPlaying | null {
 // instead of json.item, status is always "recent", and progressMs is always
 // null (we don't know how far into the track the user got last time).
 export function normalizeRecent(json: any): NowPlaying | null {
-  throw new Error("not implemented");
+  if (!json || !json.items) return null;
+
+  if (json.items.length === 0) return null;
+
+  const latestTrack = json.items[0].track;
+
+  const res: NowPlaying = {
+    status: "recent",
+    title: latestTrack.name,
+    artist: latestTrack.artists.map((a: any) => a.name).join(", "),
+    album: latestTrack.album.name,
+    imageUrl: pickImage(latestTrack.album.images),
+    url: safeSpotifyUrl(latestTrack.external_urls?.spotify),
+    durationMs: latestTrack.duration_ms,
+    progressMs: null,
+    fetchedAt: Date.now(),
+  };
+
+  return res;
 }
 
 // TODO: normalizeTopTracks() — your turn.
