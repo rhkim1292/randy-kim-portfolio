@@ -351,3 +351,83 @@ export function normalizeTopTracks(json: any): TopTrack[] {
 
   return res;
 }
+
+// ---------------------------------------------------------------------------
+// Orchestration — combines spotifyGet() + the normalizers above into what the
+// route handler and Server Components actually call. Not covered by tests
+// (needs network); see spec "Explicitly not covered by tests".
+
+// TODO: isSpotifyConfigured() — your turn.
+//
+// Returns true only when all three SPOTIFY_* env vars are present. This is
+// what lets components skip mounting the client poller entirely on an
+// unconfigured deploy (O7), instead of mounting it and having every poll
+// resolve to "unavailable" forever.
+export function isSpotifyConfigured(): boolean {
+  return Boolean(
+    process.env.SPOTIFY_CLIENT_ID &&
+    process.env.SPOTIFY_CLIENT_SECRET &&
+    process.env.SPOTIFY_REFRESH_TOKEN,
+  );
+}
+
+// TODO: getNowPlaying() — your turn.
+//
+// async function getNowPlaying(mode: FetchMode): Promise<NowPlaying>
+//
+// 1. Call spotifyGet<any>("/me/player/currently-playing", mode) —
+//    deliberately WITHOUT additional_types, which is what makes a playing
+//    podcast/audiobook come back with item: null (see the comment above
+//    normalizeCurrent for why that's enough to skip episode handling).
+// 2. If that call returned non-null JSON, run it through normalizeCurrent().
+//    If normalizeCurrent() returns a non-null NowPlaying, return it — this
+//    is the "genuinely playing or paused music" case.
+// 3. Otherwise — spotifyGet returned null (covers 204 / non-OK / timeout) OR
+//    normalizeCurrent returned null (covers ad / episode / idle / unknown)
+//    — fall through to the recently-played fallback: call
+//    spotifyGet<any>("/me/player/recently-played?limit=1", mode).
+// 4. If that returns non-null JSON, run it through normalizeRecent(). If
+//    normalizeRecent() returns a non-null NowPlaying, return it.
+// 5. If you get here (no current track AND no recent history — e.g. a
+//    brand-new account, or every upstream call failed), return
+//    { status: "unavailable", fetchedAt: Date.now() }.
+export async function getNowPlaying(mode: FetchMode): Promise<NowPlaying> {
+  const currentlyPlaying = await spotifyGet(
+    "/me/player/currently-playing",
+    mode,
+  );
+  const normalizeCurrentlyPlaying = normalizeCurrent(currentlyPlaying);
+  if (!currentlyPlaying || !normalizeCurrentlyPlaying) {
+    const recentlyPlayed = await spotifyGet(
+      "/me/player/recently-played?limit=1",
+      mode,
+    );
+
+    const normalizeRecentlyPlayed = normalizeRecent(recentlyPlayed);
+
+    if (!recentlyPlayed || !normalizeRecentlyPlayed) {
+      return {
+        status: "unavailable",
+        fetchedAt: Date.now(),
+      };
+    }
+
+    return normalizeRecentlyPlayed;
+  }
+
+  return normalizeCurrentlyPlaying;
+}
+
+// TODO: getTopTracks() — your turn.
+//
+// async function getTopTracks(limit = 3): Promise<TopTrack[]>
+//
+// Call spotifyGet<any>(`/me/top/tracks?time_range=short_term&limit=${limit}`,
+// { revalidate: 3600 }) — an hour, not the page's 30s, since Spotify only
+// recomputes these rankings roughly daily (see spec's "Why an hour, and why
+// it doesn't disturb the page's 30s ISR" note).
+// If the result is null (no creds, error, empty account), return [].
+// Otherwise return normalizeTopTracks(result).
+export async function getTopTracks(limit = 3): Promise<TopTrack[]> {
+  throw new Error("not implemented");
+}
