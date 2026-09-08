@@ -2,12 +2,14 @@ import { describe, it, expect } from "vitest";
 import {
   normalizeCurrent,
   normalizeRecent,
+  normalizeTopTracks,
   pickImage,
   safeSpotifyUrl,
 } from "./spotify";
 import currentlyPlaying from "./__fixtures__/currently-playing.json";
 import paused from "./__fixtures__/paused.json";
 import recentlyPlayed from "./__fixtures__/recently-played.json";
+import topTracks from "./__fixtures__/top-tracks.json";
 import { NowPlaying } from "./spotify";
 
 describe("Test suite for normalizeCurrent in spotify.ts", () => {
@@ -210,5 +212,46 @@ describe("Test suite for normalizeRecent in spotify.ts", () => {
     } else {
       expect.fail("normalizeRecent returning incorrect shape with valid json!");
     }
+  });
+});
+
+describe("Test suite for normalizeTopTracks in spotify.ts", () => {
+  it("normalizeTopTracks asserts an empty TopTrack array when the items property of the input json is empty", () => {
+    const topTracksArr = normalizeTopTracks({
+      items: [],
+    });
+
+    expect(topTracksArr.length).toBe(0);
+  });
+
+  it("normalizeTopTracks asserts the proper data in the resulting TopTrack array", () => {
+    const topTracksArr = normalizeTopTracks(topTracks);
+
+    expect(topTracksArr[0]).toStrictEqual({
+      id: "25McpBGoKrqT8zRgBAoLwU",
+      title: "Nevermore",
+      artist: "Bialystocks",
+      imageUrl:
+        "https://i.scdn.co/image/ab67616d00001e020fbd0fbb276de3ce6dabcc2a",
+      url: "https://open.spotify.com/track/25McpBGoKrqT8zRgBAoLwU",
+    });
+
+    expect(topTracksArr[1]).toStrictEqual({
+      id: "3cDKySSV2sOeEjoPLV5U4E",
+      title: "Everyday",
+      artist: "Bialystocks",
+      imageUrl:
+        "https://i.scdn.co/image/ab67616d00001e02568595637fb3f44997a8d625",
+      url: "https://open.spotify.com/track/3cDKySSV2sOeEjoPLV5U4E",
+    });
+
+    expect(topTracksArr[2]).toStrictEqual({
+      id: "1YYhDizHx7PnDhAhko6cDS",
+      title: "Take Me Home, Country Roads - Original Version",
+      artist: "John Denver",
+      imageUrl:
+        "https://i.scdn.co/image/ab67616d00001e02795c9ba853f5a9f7a88b4e31",
+      url: "https://open.spotify.com/track/1YYhDizHx7PnDhAhko6cDS",
+    });
   });
 });

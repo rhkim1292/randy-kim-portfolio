@@ -336,5 +336,18 @@ export function normalizeRecent(json: any): NowPlaying | null {
 //   - imageUrl: pickImage(item.album.images)
 //   - url:      safeSpotifyUrl(item.external_urls?.spotify)
 export function normalizeTopTracks(json: any): TopTrack[] {
-  throw new Error("not implemented");
+  const res: TopTrack[] = [];
+  if (!json || !json.items) return res;
+
+  for (let i = 0; i < json.items.length; i++) {
+    res.push({
+      id: json.items[i].id,
+      title: json.items[i].name,
+      artist: json.items[i].artists.map((a: any) => a.name).join(", "),
+      imageUrl: pickImage(json.items[i].album.images),
+      url: safeSpotifyUrl(json.items[i].external_urls?.spotify),
+    });
+  }
+
+  return res;
 }
