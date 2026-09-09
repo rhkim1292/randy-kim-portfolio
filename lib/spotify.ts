@@ -32,7 +32,7 @@ const TIMEOUT_MS = 4000;
 // warm instance. See spec "Auth" + "lib/spotify.ts" sections for why.
 let cachedToken: { value: string; expiresAt: number } | null = null;
 
-// TODO: getAccessToken() — your turn.
+// TODO: getAccessToken()
 //
 // Read SPOTIFY_CLIENT_ID / SPOTIFY_CLIENT_SECRET / SPOTIFY_REFRESH_TOKEN from
 // process.env. If any is missing, return null before any network call (this
@@ -108,7 +108,7 @@ const API_BASE = "https://api.spotify.com/v1";
 // discussion. NEVER hardcode "no-store" inside this file's shared helpers.
 export type FetchMode = "no-store" | { revalidate: number };
 
-// TODO: spotifyGet<T>() — your turn.
+// TODO: spotifyGet<T>()
 //
 // Generic helper: async function spotifyGet<T>(path: string, mode: FetchMode,
 // retryOn401 = true): Promise<T | null>
@@ -193,7 +193,7 @@ type SpotifyImage = {
   height: number | null;
 };
 
-// TODO: pickImage() — your turn.
+// TODO: pickImage()
 //
 // Spotify returns album images LARGEST FIRST. Sort ascending by width, then
 // return the url of the smallest image that is still >= 200px wide. If none
@@ -223,7 +223,7 @@ export function pickImage(images: SpotifyImage[]): string | null {
   return images[lastAcceptableImgIdx].url;
 }
 
-// TODO: safeSpotifyUrl() — your turn.
+// TODO: safeSpotifyUrl()
 //
 // external_urls.spotify gets rendered straight into an <a href>. React
 // escapes text content but does NOT sanitize URL schemes, so this is the one
@@ -241,7 +241,7 @@ export function safeSpotifyUrl(url: string | null | undefined): string | null {
   return url;
 }
 
-// TODO: normalizeCurrent() — your turn.
+// TODO: normalizeCurrent()
 //
 // Takes the parsed JSON body of GET /v1/me/player/currently-playing (a "200"
 // response) and returns the "playing"/"paused" arm of NowPlaying, or null
@@ -294,7 +294,7 @@ export function normalizeCurrent(json: any): NowPlaying | null {
   return res;
 }
 
-// TODO: normalizeRecent() — your turn.
+// TODO: normalizeRecent()
 //
 // Takes the parsed JSON body of GET /v1/me/player/recently-played?limit=1
 // (shape: { items: [{ track, played_at }] }) and returns the "recent" arm of
@@ -325,7 +325,7 @@ export function normalizeRecent(json: any): NowPlaying | null {
   return res;
 }
 
-// TODO: normalizeTopTracks() — your turn.
+// TODO: normalizeTopTracks()
 //
 // Takes the parsed JSON body of GET /v1/me/top/tracks (shape:
 // { items: [...] }) and maps it to TopTrack[], preserving order. Empty
@@ -357,7 +357,7 @@ export function normalizeTopTracks(json: any): TopTrack[] {
 // route handler and Server Components actually call. Not covered by tests
 // (needs network); see spec "Explicitly not covered by tests".
 
-// TODO: isSpotifyConfigured() — your turn.
+// TODO: isSpotifyConfigured()
 //
 // Returns true only when all three SPOTIFY_* env vars are present. This is
 // what lets components skip mounting the client poller entirely on an
@@ -371,7 +371,7 @@ export function isSpotifyConfigured(): boolean {
   );
 }
 
-// TODO: getNowPlaying() — your turn.
+// TODO: getNowPlaying()
 //
 // async function getNowPlaying(mode: FetchMode): Promise<NowPlaying>
 //
@@ -418,7 +418,7 @@ export async function getNowPlaying(mode: FetchMode): Promise<NowPlaying> {
   return normalizeCurrentlyPlaying;
 }
 
-// TODO: getTopTracks() — your turn.
+// TODO: getTopTracks()
 //
 // async function getTopTracks(limit = 3): Promise<TopTrack[]>
 //
@@ -429,5 +429,12 @@ export async function getNowPlaying(mode: FetchMode): Promise<NowPlaying> {
 // If the result is null (no creds, error, empty account), return [].
 // Otherwise return normalizeTopTracks(result).
 export async function getTopTracks(limit = 3): Promise<TopTrack[]> {
-  throw new Error("not implemented");
+  const topTracks = await spotifyGet(
+    `/me/top/tracks?time_range=short_term&limit=${limit}`,
+    { revalidate: 3600 },
+  );
+
+  if (!topTracks) return [];
+
+  return normalizeTopTracks(topTracks);
 }
