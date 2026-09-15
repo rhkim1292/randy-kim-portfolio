@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import NowPlaying from "@/components/NowPlaying";
 // import CharacterSheet from "@/components/CharacterSheet";
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
         </p>
         <CharacterSheet />
       </div> */}
+      <NowPlaying />
     </div>
   );
 }

@@ -38,11 +38,16 @@ const config: Config = {
           "0%, 100%": { boxShadow: "0 0 18px -6px var(--tw-shadow-color)" },
           "50%": { boxShadow: "0 0 36px -2px var(--tw-shadow-color)" },
         },
+        "eq-bar": {
+          "0%, 100%": { transform: "scaleY(0.3)" },
+          "50%": { transform: "scaleY(1)" },
+        },
       },
       animation: {
         blink: "blink 1s step-end infinite",
         sparkle: "sparkle 1.1s ease-in-out infinite",
         "glow-shimmer": "glow-shimmer 1.6s ease-in-out infinite",
+        "eq-bar": "eq-bar 900ms ease-in-out infinite",
       },
     },
   },

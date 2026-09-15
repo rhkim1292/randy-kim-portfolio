@@ -1,0 +1,1490 @@
+{
+  "items": [
+    {
+      "album": {
+        "album_type": "single",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+            },
+            "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+            "id": "3y24PAHjsJ3rWvMWERM7Oe",
+            "name": "Bialystocks",
+            "type": "artist",
+            "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/5ru7PBhCc7z2n9541AYPyz"
+        },
+        "href": "https://api.spotify.com/v1/albums/5ru7PBhCc7z2n9541AYPyz",
+        "id": "5ru7PBhCc7z2n9541AYPyz",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b2730fbd0fbb276de3ce6dabcc2a",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e020fbd0fbb276de3ce6dabcc2a",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d000048510fbd0fbb276de3ce6dabcc2a",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "Nevermore",
+        "release_date": "2021-01-20",
+        "release_date_precision": "day",
+        "total_tracks": 1,
+        "type": "album",
+        "uri": "spotify:album:5ru7PBhCc7z2n9541AYPyz"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+          },
+          "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+          "id": "3y24PAHjsJ3rWvMWERM7Oe",
+          "name": "Bialystocks",
+          "type": "artist",
+          "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 303808,
+      "explicit": false,
+      "external_ids": { "isrc": "JPG102100012" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/25McpBGoKrqT8zRgBAoLwU"
+      },
+      "href": "https://api.spotify.com/v1/tracks/25McpBGoKrqT8zRgBAoLwU",
+      "id": "25McpBGoKrqT8zRgBAoLwU",
+      "is_local": false,
+      "is_playable": true,
+      "name": "Nevermore",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:25McpBGoKrqT8zRgBAoLwU"
+    },
+    {
+      "album": {
+        "album_type": "single",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+            },
+            "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+            "id": "3y24PAHjsJ3rWvMWERM7Oe",
+            "name": "Bialystocks",
+            "type": "artist",
+            "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/6aIf5GYmq0vZUAqJeAQDhS"
+        },
+        "href": "https://api.spotify.com/v1/albums/6aIf5GYmq0vZUAqJeAQDhS",
+        "id": "6aIf5GYmq0vZUAqJeAQDhS",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273568595637fb3f44997a8d625",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02568595637fb3f44997a8d625",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851568595637fb3f44997a8d625",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "Everyday",
+        "release_date": "2026-02-12",
+        "release_date_precision": "day",
+        "total_tracks": 1,
+        "type": "album",
+        "uri": "spotify:album:6aIf5GYmq0vZUAqJeAQDhS"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+          },
+          "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+          "id": "3y24PAHjsJ3rWvMWERM7Oe",
+          "name": "Bialystocks",
+          "type": "artist",
+          "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 264608,
+      "explicit": false,
+      "external_ids": { "isrc": "JPPC02610304" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/3cDKySSV2sOeEjoPLV5U4E"
+      },
+      "href": "https://api.spotify.com/v1/tracks/3cDKySSV2sOeEjoPLV5U4E",
+      "id": "3cDKySSV2sOeEjoPLV5U4E",
+      "is_local": false,
+      "is_playable": true,
+      "name": "Everyday",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:3cDKySSV2sOeEjoPLV5U4E"
+    },
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/7EK1bQADBoqbYXnT4Cqv9w"
+            },
+            "href": "https://api.spotify.com/v1/artists/7EK1bQADBoqbYXnT4Cqv9w",
+            "id": "7EK1bQADBoqbYXnT4Cqv9w",
+            "name": "John Denver",
+            "type": "artist",
+            "uri": "spotify:artist:7EK1bQADBoqbYXnT4Cqv9w"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/78FZXQkBGm2IOPrE9f64sU"
+        },
+        "href": "https://api.spotify.com/v1/albums/78FZXQkBGm2IOPrE9f64sU",
+        "id": "78FZXQkBGm2IOPrE9f64sU",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273795c9ba853f5a9f7a88b4e31",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02795c9ba853f5a9f7a88b4e31",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851795c9ba853f5a9f7a88b4e31",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "Poems, Prayers and Promises",
+        "release_date": "1971",
+        "release_date_precision": "year",
+        "total_tracks": 12,
+        "type": "album",
+        "uri": "spotify:album:78FZXQkBGm2IOPrE9f64sU"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/7EK1bQADBoqbYXnT4Cqv9w"
+          },
+          "href": "https://api.spotify.com/v1/artists/7EK1bQADBoqbYXnT4Cqv9w",
+          "id": "7EK1bQADBoqbYXnT4Cqv9w",
+          "name": "John Denver",
+          "type": "artist",
+          "uri": "spotify:artist:7EK1bQADBoqbYXnT4Cqv9w"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 193937,
+      "explicit": false,
+      "external_ids": { "isrc": "USRC11100481" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/1YYhDizHx7PnDhAhko6cDS"
+      },
+      "href": "https://api.spotify.com/v1/tracks/1YYhDizHx7PnDhAhko6cDS",
+      "id": "1YYhDizHx7PnDhAhko6cDS",
+      "is_local": false,
+      "is_playable": true,
+      "name": "Take Me Home, Country Roads - Original Version",
+      "track_number": 7,
+      "type": "track",
+      "uri": "spotify:track:1YYhDizHx7PnDhAhko6cDS"
+    },
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/2DaxqgrOhkeH0fpeiQq2f4"
+            },
+            "href": "https://api.spotify.com/v1/artists/2DaxqgrOhkeH0fpeiQq2f4",
+            "id": "2DaxqgrOhkeH0fpeiQq2f4",
+            "name": "Oasis",
+            "type": "artist",
+            "uri": "spotify:artist:2DaxqgrOhkeH0fpeiQq2f4"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/1VW1MFNstaJuygaoTPkdCk"
+        },
+        "href": "https://api.spotify.com/v1/albums/1VW1MFNstaJuygaoTPkdCk",
+        "id": "1VW1MFNstaJuygaoTPkdCk",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b27385e5dcc05cc216a10f141480",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e0285e5dcc05cc216a10f141480",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d0000485185e5dcc05cc216a10f141480",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "(What's The Story) Morning Glory? [Remastered]",
+        "release_date": "1995-10-02",
+        "release_date_precision": "day",
+        "total_tracks": 40,
+        "type": "album",
+        "uri": "spotify:album:1VW1MFNstaJuygaoTPkdCk"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2DaxqgrOhkeH0fpeiQq2f4"
+          },
+          "href": "https://api.spotify.com/v1/artists/2DaxqgrOhkeH0fpeiQq2f4",
+          "id": "2DaxqgrOhkeH0fpeiQq2f4",
+          "name": "Oasis",
+          "type": "artist",
+          "uri": "spotify:artist:2DaxqgrOhkeH0fpeiQq2f4"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 258773,
+      "explicit": false,
+      "external_ids": { "isrc": "GBQCP1400109" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/5qqabIl2vWzo9ApSC317sa"
+      },
+      "href": "https://api.spotify.com/v1/tracks/5qqabIl2vWzo9ApSC317sa",
+      "id": "5qqabIl2vWzo9ApSC317sa",
+      "is_local": false,
+      "is_playable": true,
+      "name": "Wonderwall - Remastered",
+      "track_number": 3,
+      "type": "track",
+      "uri": "spotify:track:5qqabIl2vWzo9ApSC317sa"
+    },
+    {
+      "album": {
+        "album_type": "single",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/36cgvBn0aadzOijnjjwqMN"
+            },
+            "href": "https://api.spotify.com/v1/artists/36cgvBn0aadzOijnjjwqMN",
+            "id": "36cgvBn0aadzOijnjjwqMN",
+            "name": "ILLIT",
+            "type": "artist",
+            "uri": "spotify:artist:36cgvBn0aadzOijnjjwqMN"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/5VIt2dA2StboE900mllWdJ"
+        },
+        "href": "https://api.spotify.com/v1/albums/5VIt2dA2StboE900mllWdJ",
+        "id": "5VIt2dA2StboE900mllWdJ",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b27361eea484e31bca065904f1c6",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e0261eea484e31bca065904f1c6",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d0000485161eea484e31bca065904f1c6",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "MAMIHLAPINATAPAI",
+        "release_date": "2026-04-30",
+        "release_date_precision": "day",
+        "total_tracks": 5,
+        "type": "album",
+        "uri": "spotify:album:5VIt2dA2StboE900mllWdJ"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/36cgvBn0aadzOijnjjwqMN"
+          },
+          "href": "https://api.spotify.com/v1/artists/36cgvBn0aadzOijnjjwqMN",
+          "id": "36cgvBn0aadzOijnjjwqMN",
+          "name": "ILLIT",
+          "type": "artist",
+          "uri": "spotify:artist:36cgvBn0aadzOijnjjwqMN"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 168682,
+      "explicit": false,
+      "external_ids": { "isrc": "USA2P2617167" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/06c1p8O0RF26U0jSGJ7Rbc"
+      },
+      "href": "https://api.spotify.com/v1/tracks/06c1p8O0RF26U0jSGJ7Rbc",
+      "id": "06c1p8O0RF26U0jSGJ7Rbc",
+      "is_local": false,
+      "is_playable": true,
+      "name": "GRWM (Get Ready With Me)",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:06c1p8O0RF26U0jSGJ7Rbc"
+    },
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+            },
+            "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+            "id": "3y24PAHjsJ3rWvMWERM7Oe",
+            "name": "Bialystocks",
+            "type": "artist",
+            "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/7dyuNqSWAptyjwzRVzCiOI"
+        },
+        "href": "https://api.spotify.com/v1/albums/7dyuNqSWAptyjwzRVzCiOI",
+        "id": "7dyuNqSWAptyjwzRVzCiOI",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b2733113c15ccae20a68ae63dadd",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e023113c15ccae20a68ae63dadd",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d000048513113c15ccae20a68ae63dadd",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "Quicksand",
+        "release_date": "2022-11-30",
+        "release_date_precision": "day",
+        "total_tracks": 10,
+        "type": "album",
+        "uri": "spotify:album:7dyuNqSWAptyjwzRVzCiOI"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+          },
+          "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+          "id": "3y24PAHjsJ3rWvMWERM7Oe",
+          "name": "Bialystocks",
+          "type": "artist",
+          "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 225720,
+      "explicit": false,
+      "external_ids": { "isrc": "JPPC02212768" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/2NTZPgc5SLsKQX8VzypAh6"
+      },
+      "href": "https://api.spotify.com/v1/tracks/2NTZPgc5SLsKQX8VzypAh6",
+      "id": "2NTZPgc5SLsKQX8VzypAh6",
+      "is_local": false,
+      "is_playable": true,
+      "name": "はだかのゆめ",
+      "track_number": 9,
+      "type": "track",
+      "uri": "spotify:track:2NTZPgc5SLsKQX8VzypAh6"
+    },
+    {
+      "album": {
+        "album_type": "single",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/36cgvBn0aadzOijnjjwqMN"
+            },
+            "href": "https://api.spotify.com/v1/artists/36cgvBn0aadzOijnjjwqMN",
+            "id": "36cgvBn0aadzOijnjjwqMN",
+            "name": "ILLIT",
+            "type": "artist",
+            "uri": "spotify:artist:36cgvBn0aadzOijnjjwqMN"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/5VIt2dA2StboE900mllWdJ"
+        },
+        "href": "https://api.spotify.com/v1/albums/5VIt2dA2StboE900mllWdJ",
+        "id": "5VIt2dA2StboE900mllWdJ",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b27361eea484e31bca065904f1c6",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e0261eea484e31bca065904f1c6",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d0000485161eea484e31bca065904f1c6",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "MAMIHLAPINATAPAI",
+        "release_date": "2026-04-30",
+        "release_date_precision": "day",
+        "total_tracks": 5,
+        "type": "album",
+        "uri": "spotify:album:5VIt2dA2StboE900mllWdJ"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/36cgvBn0aadzOijnjjwqMN"
+          },
+          "href": "https://api.spotify.com/v1/artists/36cgvBn0aadzOijnjjwqMN",
+          "id": "36cgvBn0aadzOijnjjwqMN",
+          "name": "ILLIT",
+          "type": "artist",
+          "uri": "spotify:artist:36cgvBn0aadzOijnjjwqMN"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 138284,
+      "explicit": false,
+      "external_ids": { "isrc": "USA2P2617168" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/1D5L58KLBbceOynTP4DQnY"
+      },
+      "href": "https://api.spotify.com/v1/tracks/1D5L58KLBbceOynTP4DQnY",
+      "id": "1D5L58KLBbceOynTP4DQnY",
+      "is_local": false,
+      "is_playable": true,
+      "name": "It's Me",
+      "track_number": 2,
+      "type": "track",
+      "uri": "spotify:track:1D5L58KLBbceOynTP4DQnY"
+    },
+    {
+      "album": {
+        "album_type": "single",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/36cgvBn0aadzOijnjjwqMN"
+            },
+            "href": "https://api.spotify.com/v1/artists/36cgvBn0aadzOijnjjwqMN",
+            "id": "36cgvBn0aadzOijnjjwqMN",
+            "name": "ILLIT",
+            "type": "artist",
+            "uri": "spotify:artist:36cgvBn0aadzOijnjjwqMN"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/5VIt2dA2StboE900mllWdJ"
+        },
+        "href": "https://api.spotify.com/v1/albums/5VIt2dA2StboE900mllWdJ",
+        "id": "5VIt2dA2StboE900mllWdJ",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b27361eea484e31bca065904f1c6",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e0261eea484e31bca065904f1c6",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d0000485161eea484e31bca065904f1c6",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "MAMIHLAPINATAPAI",
+        "release_date": "2026-04-30",
+        "release_date_precision": "day",
+        "total_tracks": 5,
+        "type": "album",
+        "uri": "spotify:album:5VIt2dA2StboE900mllWdJ"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/36cgvBn0aadzOijnjjwqMN"
+          },
+          "href": "https://api.spotify.com/v1/artists/36cgvBn0aadzOijnjjwqMN",
+          "id": "36cgvBn0aadzOijnjjwqMN",
+          "name": "ILLIT",
+          "type": "artist",
+          "uri": "spotify:artist:36cgvBn0aadzOijnjjwqMN"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 149852,
+      "explicit": false,
+      "external_ids": { "isrc": "USA2P2617169" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/16VomaSiUmaRdubMxh4FyY"
+      },
+      "href": "https://api.spotify.com/v1/tracks/16VomaSiUmaRdubMxh4FyY",
+      "id": "16VomaSiUmaRdubMxh4FyY",
+      "is_local": false,
+      "is_playable": true,
+      "name": "paw, paw!",
+      "track_number": 3,
+      "type": "track",
+      "uri": "spotify:track:16VomaSiUmaRdubMxh4FyY"
+    },
+    {
+      "album": {
+        "album_type": "single",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/36cgvBn0aadzOijnjjwqMN"
+            },
+            "href": "https://api.spotify.com/v1/artists/36cgvBn0aadzOijnjjwqMN",
+            "id": "36cgvBn0aadzOijnjjwqMN",
+            "name": "ILLIT",
+            "type": "artist",
+            "uri": "spotify:artist:36cgvBn0aadzOijnjjwqMN"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/5VIt2dA2StboE900mllWdJ"
+        },
+        "href": "https://api.spotify.com/v1/albums/5VIt2dA2StboE900mllWdJ",
+        "id": "5VIt2dA2StboE900mllWdJ",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b27361eea484e31bca065904f1c6",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e0261eea484e31bca065904f1c6",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d0000485161eea484e31bca065904f1c6",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "MAMIHLAPINATAPAI",
+        "release_date": "2026-04-30",
+        "release_date_precision": "day",
+        "total_tracks": 5,
+        "type": "album",
+        "uri": "spotify:album:5VIt2dA2StboE900mllWdJ"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/36cgvBn0aadzOijnjjwqMN"
+          },
+          "href": "https://api.spotify.com/v1/artists/36cgvBn0aadzOijnjjwqMN",
+          "id": "36cgvBn0aadzOijnjjwqMN",
+          "name": "ILLIT",
+          "type": "artist",
+          "uri": "spotify:artist:36cgvBn0aadzOijnjjwqMN"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 181352,
+      "explicit": false,
+      "external_ids": { "isrc": "USA2P2617170" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/6WSsc50Hxu1qK3qFpBfekj"
+      },
+      "href": "https://api.spotify.com/v1/tracks/6WSsc50Hxu1qK3qFpBfekj",
+      "id": "6WSsc50Hxu1qK3qFpBfekj",
+      "is_local": false,
+      "is_playable": true,
+      "name": "Mamihlapinatapai",
+      "track_number": 4,
+      "type": "track",
+      "uri": "spotify:track:6WSsc50Hxu1qK3qFpBfekj"
+    },
+    {
+      "album": {
+        "album_type": "single",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/36cgvBn0aadzOijnjjwqMN"
+            },
+            "href": "https://api.spotify.com/v1/artists/36cgvBn0aadzOijnjjwqMN",
+            "id": "36cgvBn0aadzOijnjjwqMN",
+            "name": "ILLIT",
+            "type": "artist",
+            "uri": "spotify:artist:36cgvBn0aadzOijnjjwqMN"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/5VIt2dA2StboE900mllWdJ"
+        },
+        "href": "https://api.spotify.com/v1/albums/5VIt2dA2StboE900mllWdJ",
+        "id": "5VIt2dA2StboE900mllWdJ",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b27361eea484e31bca065904f1c6",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e0261eea484e31bca065904f1c6",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d0000485161eea484e31bca065904f1c6",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "MAMIHLAPINATAPAI",
+        "release_date": "2026-04-30",
+        "release_date_precision": "day",
+        "total_tracks": 5,
+        "type": "album",
+        "uri": "spotify:album:5VIt2dA2StboE900mllWdJ"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/36cgvBn0aadzOijnjjwqMN"
+          },
+          "href": "https://api.spotify.com/v1/artists/36cgvBn0aadzOijnjjwqMN",
+          "id": "36cgvBn0aadzOijnjjwqMN",
+          "name": "ILLIT",
+          "type": "artist",
+          "uri": "spotify:artist:36cgvBn0aadzOijnjjwqMN"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 158204,
+      "explicit": false,
+      "external_ids": { "isrc": "USA2P2617171" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/3nGm6agHE598KavgIyATy7"
+      },
+      "href": "https://api.spotify.com/v1/tracks/3nGm6agHE598KavgIyATy7",
+      "id": "3nGm6agHE598KavgIyATy7",
+      "is_local": false,
+      "is_playable": true,
+      "name": "Love, older you",
+      "track_number": 5,
+      "type": "track",
+      "uri": "spotify:track:3nGm6agHE598KavgIyATy7"
+    },
+    {
+      "album": {
+        "album_type": "single",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+            },
+            "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+            "id": "3y24PAHjsJ3rWvMWERM7Oe",
+            "name": "Bialystocks",
+            "type": "artist",
+            "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/6IiKp43rjWo4N1jVEhBzhw"
+        },
+        "href": "https://api.spotify.com/v1/albums/6IiKp43rjWo4N1jVEhBzhw",
+        "id": "6IiKp43rjWo4N1jVEhBzhw",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273165a12496e48fc753d6d7f1f",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02165a12496e48fc753d6d7f1f",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851165a12496e48fc753d6d7f1f",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "言伝",
+        "release_date": "2026-01-05",
+        "release_date_precision": "day",
+        "total_tracks": 1,
+        "type": "album",
+        "uri": "spotify:album:6IiKp43rjWo4N1jVEhBzhw"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+          },
+          "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+          "id": "3y24PAHjsJ3rWvMWERM7Oe",
+          "name": "Bialystocks",
+          "type": "artist",
+          "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 275925,
+      "explicit": false,
+      "external_ids": { "isrc": "JPPC02513454" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/28O58Xm1nOFvVOERz1JCpx"
+      },
+      "href": "https://api.spotify.com/v1/tracks/28O58Xm1nOFvVOERz1JCpx",
+      "id": "28O58Xm1nOFvVOERz1JCpx",
+      "is_local": false,
+      "is_playable": true,
+      "name": "言伝",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:28O58Xm1nOFvVOERz1JCpx"
+    },
+    {
+      "album": {
+        "album_type": "single",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+            },
+            "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+            "id": "3y24PAHjsJ3rWvMWERM7Oe",
+            "name": "Bialystocks",
+            "type": "artist",
+            "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/44jHepyuX6FuDwUIwaOKFR"
+        },
+        "href": "https://api.spotify.com/v1/albums/44jHepyuX6FuDwUIwaOKFR",
+        "id": "44jHepyuX6FuDwUIwaOKFR",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b2736d1c28a469ecddf6b09a64e8",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e026d1c28a469ecddf6b09a64e8",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d000048516d1c28a469ecddf6b09a64e8",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "一瞬",
+        "release_date": "2026-05-22",
+        "release_date_precision": "day",
+        "total_tracks": 1,
+        "type": "album",
+        "uri": "spotify:album:44jHepyuX6FuDwUIwaOKFR"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+          },
+          "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+          "id": "3y24PAHjsJ3rWvMWERM7Oe",
+          "name": "Bialystocks",
+          "type": "artist",
+          "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 204444,
+      "explicit": false,
+      "external_ids": { "isrc": "JPPC02610908" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/7yLvQJIUdXsyIdXL4LbDwZ"
+      },
+      "href": "https://api.spotify.com/v1/tracks/7yLvQJIUdXsyIdXL4LbDwZ",
+      "id": "7yLvQJIUdXsyIdXL4LbDwZ",
+      "is_local": false,
+      "is_playable": true,
+      "name": "一瞬",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:7yLvQJIUdXsyIdXL4LbDwZ"
+    },
+    {
+      "album": {
+        "album_type": "single",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/2IDLDx25HU1nQMKde4n61a"
+            },
+            "href": "https://api.spotify.com/v1/artists/2IDLDx25HU1nQMKde4n61a",
+            "id": "2IDLDx25HU1nQMKde4n61a",
+            "name": "Rich Brian",
+            "type": "artist",
+            "uri": "spotify:artist:2IDLDx25HU1nQMKde4n61a"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/34NhTGfoWNr4W3oKx3HA7g"
+        },
+        "href": "https://api.spotify.com/v1/albums/34NhTGfoWNr4W3oKx3HA7g",
+        "id": "34NhTGfoWNr4W3oKx3HA7g",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b2735543d24ebfd94bd732a4a03a",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e025543d24ebfd94bd732a4a03a",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d000048515543d24ebfd94bd732a4a03a",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "Tear",
+        "release_date": "2026-07-10",
+        "release_date_precision": "day",
+        "total_tracks": 1,
+        "type": "album",
+        "uri": "spotify:album:34NhTGfoWNr4W3oKx3HA7g"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/2IDLDx25HU1nQMKde4n61a"
+          },
+          "href": "https://api.spotify.com/v1/artists/2IDLDx25HU1nQMKde4n61a",
+          "id": "2IDLDx25HU1nQMKde4n61a",
+          "name": "Rich Brian",
+          "type": "artist",
+          "uri": "spotify:artist:2IDLDx25HU1nQMKde4n61a"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 249500,
+      "explicit": true,
+      "external_ids": { "isrc": "QM7282678340" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/3rhgTxmFHqPYOBq9xzcyUT"
+      },
+      "href": "https://api.spotify.com/v1/tracks/3rhgTxmFHqPYOBq9xzcyUT",
+      "id": "3rhgTxmFHqPYOBq9xzcyUT",
+      "is_local": false,
+      "is_playable": true,
+      "name": "Tear",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:3rhgTxmFHqPYOBq9xzcyUT"
+    },
+    {
+      "album": {
+        "album_type": "single",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/6YVMFz59CuY7ngCxTxjpxE"
+            },
+            "href": "https://api.spotify.com/v1/artists/6YVMFz59CuY7ngCxTxjpxE",
+            "id": "6YVMFz59CuY7ngCxTxjpxE",
+            "name": "aespa",
+            "type": "artist",
+            "uri": "spotify:artist:6YVMFz59CuY7ngCxTxjpxE"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/5pwhf4kv2qX10i6k2uJsFp"
+        },
+        "href": "https://api.spotify.com/v1/albums/5pwhf4kv2qX10i6k2uJsFp",
+        "id": "5pwhf4kv2qX10i6k2uJsFp",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273304c46fde5f5244a66f7317b",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02304c46fde5f5244a66f7317b",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851304c46fde5f5244a66f7317b",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "KISS N TELL",
+        "release_date": "2026-07-24",
+        "release_date_precision": "day",
+        "total_tracks": 6,
+        "type": "album",
+        "uri": "spotify:album:5pwhf4kv2qX10i6k2uJsFp"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/6YVMFz59CuY7ngCxTxjpxE"
+          },
+          "href": "https://api.spotify.com/v1/artists/6YVMFz59CuY7ngCxTxjpxE",
+          "id": "6YVMFz59CuY7ngCxTxjpxE",
+          "name": "aespa",
+          "type": "artist",
+          "uri": "spotify:artist:6YVMFz59CuY7ngCxTxjpxE"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 166000,
+      "explicit": false,
+      "external_ids": { "isrc": "JPWP02670574" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/3Fse9qXqMNey4TL5mLy8IF"
+      },
+      "href": "https://api.spotify.com/v1/tracks/3Fse9qXqMNey4TL5mLy8IF",
+      "id": "3Fse9qXqMNey4TL5mLy8IF",
+      "is_local": false,
+      "is_playable": true,
+      "name": "KISS N TELL",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:3Fse9qXqMNey4TL5mLy8IF"
+    },
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/5tHiL8SKSaZGMBUPIiSmX4"
+            },
+            "href": "https://api.spotify.com/v1/artists/5tHiL8SKSaZGMBUPIiSmX4",
+            "id": "5tHiL8SKSaZGMBUPIiSmX4",
+            "name": "KITSCHKRIEG",
+            "type": "artist",
+            "uri": "spotify:artist:5tHiL8SKSaZGMBUPIiSmX4"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/778QaCfUiirKHFrXJuJGIL"
+        },
+        "href": "https://api.spotify.com/v1/albums/778QaCfUiirKHFrXJuJGIL",
+        "id": "778QaCfUiirKHFrXJuJGIL",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b2737c8ca044c71fda2957065c06",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e027c8ca044c71fda2957065c06",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d000048517c8ca044c71fda2957065c06",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "KITSCHKRIEG ZWEI",
+        "release_date": "2026-06-05",
+        "release_date_precision": "day",
+        "total_tracks": 13,
+        "type": "album",
+        "uri": "spotify:album:778QaCfUiirKHFrXJuJGIL"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/5tHiL8SKSaZGMBUPIiSmX4"
+          },
+          "href": "https://api.spotify.com/v1/artists/5tHiL8SKSaZGMBUPIiSmX4",
+          "id": "5tHiL8SKSaZGMBUPIiSmX4",
+          "name": "KITSCHKRIEG",
+          "type": "artist",
+          "uri": "spotify:artist:5tHiL8SKSaZGMBUPIiSmX4"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/5j3YjOV8eusoDutC6yPjhS"
+          },
+          "href": "https://api.spotify.com/v1/artists/5j3YjOV8eusoDutC6yPjhS",
+          "id": "5j3YjOV8eusoDutC6yPjhS",
+          "name": "Blumengarten",
+          "type": "artist",
+          "uri": "spotify:artist:5j3YjOV8eusoDutC6yPjhS"
+        },
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/0JBdTCGs111JKKYfLqOEBa"
+          },
+          "href": "https://api.spotify.com/v1/artists/0JBdTCGs111JKKYfLqOEBa",
+          "id": "0JBdTCGs111JKKYfLqOEBa",
+          "name": "Shirin David",
+          "type": "artist",
+          "uri": "spotify:artist:0JBdTCGs111JKKYfLqOEBa"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 188852,
+      "explicit": false,
+      "external_ids": { "isrc": "DEKF22600057" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/1FsURdV1P2M3VCKdbTsZak"
+      },
+      "href": "https://api.spotify.com/v1/tracks/1FsURdV1P2M3VCKdbTsZak",
+      "id": "1FsURdV1P2M3VCKdbTsZak",
+      "is_local": false,
+      "is_playable": true,
+      "name": "Gut Genug (mit Blumengarten & Shirin David)",
+      "track_number": 13,
+      "type": "track",
+      "uri": "spotify:track:1FsURdV1P2M3VCKdbTsZak"
+    },
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/57vWImR43h4CaDao012Ofp"
+            },
+            "href": "https://api.spotify.com/v1/artists/57vWImR43h4CaDao012Ofp",
+            "id": "57vWImR43h4CaDao012Ofp",
+            "name": "Steve Lacy",
+            "type": "artist",
+            "uri": "spotify:artist:57vWImR43h4CaDao012Ofp"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/289GZwycrFReuNB706obBx"
+        },
+        "href": "https://api.spotify.com/v1/albums/289GZwycrFReuNB706obBx",
+        "id": "289GZwycrFReuNB706obBx",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b2734ea9ba86cd9506a004bab042",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e024ea9ba86cd9506a004bab042",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d000048514ea9ba86cd9506a004bab042",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "Oh yeah?",
+        "release_date": "2026-07-17",
+        "release_date_precision": "day",
+        "total_tracks": 10,
+        "type": "album",
+        "uri": "spotify:album:289GZwycrFReuNB706obBx"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/57vWImR43h4CaDao012Ofp"
+          },
+          "href": "https://api.spotify.com/v1/artists/57vWImR43h4CaDao012Ofp",
+          "id": "57vWImR43h4CaDao012Ofp",
+          "name": "Steve Lacy",
+          "type": "artist",
+          "uri": "spotify:artist:57vWImR43h4CaDao012Ofp"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 170584,
+      "explicit": true,
+      "external_ids": { "isrc": "USRC12601059" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/22NHkFYbgxB2Zirj29Gbp8"
+      },
+      "href": "https://api.spotify.com/v1/tracks/22NHkFYbgxB2Zirj29Gbp8",
+      "id": "22NHkFYbgxB2Zirj29Gbp8",
+      "is_local": false,
+      "is_playable": true,
+      "name": "oh yeah?",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:22NHkFYbgxB2Zirj29Gbp8"
+    },
+    {
+      "album": {
+        "album_type": "single",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+            },
+            "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+            "id": "3y24PAHjsJ3rWvMWERM7Oe",
+            "name": "Bialystocks",
+            "type": "artist",
+            "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/66OiUPRQvtxWRRuO2ohQqY"
+        },
+        "href": "https://api.spotify.com/v1/albums/66OiUPRQvtxWRRuO2ohQqY",
+        "id": "66OiUPRQvtxWRRuO2ohQqY",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273c5b7b603aa3e3e91167e055d",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02c5b7b603aa3e3e91167e055d",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851c5b7b603aa3e3e91167e055d",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "光のあと",
+        "release_date": "2021-09-29",
+        "release_date_precision": "day",
+        "total_tracks": 1,
+        "type": "album",
+        "uri": "spotify:album:66OiUPRQvtxWRRuO2ohQqY"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+          },
+          "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+          "id": "3y24PAHjsJ3rWvMWERM7Oe",
+          "name": "Bialystocks",
+          "type": "artist",
+          "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 194816,
+      "explicit": false,
+      "external_ids": { "isrc": "JPPC02110962" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/4gUPoiw17r4TC9x6NutnKS"
+      },
+      "href": "https://api.spotify.com/v1/tracks/4gUPoiw17r4TC9x6NutnKS",
+      "id": "4gUPoiw17r4TC9x6NutnKS",
+      "is_local": false,
+      "is_playable": true,
+      "name": "光のあと",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:4gUPoiw17r4TC9x6NutnKS"
+    },
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+            },
+            "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+            "id": "3y24PAHjsJ3rWvMWERM7Oe",
+            "name": "Bialystocks",
+            "type": "artist",
+            "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/3bj0rxNiqW8FPj2exowDFQ"
+        },
+        "href": "https://api.spotify.com/v1/albums/3bj0rxNiqW8FPj2exowDFQ",
+        "id": "3bj0rxNiqW8FPj2exowDFQ",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273e8b7b3275e1004b4f38f6439",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02e8b7b3275e1004b4f38f6439",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851e8b7b3275e1004b4f38f6439",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "ビアリストックス",
+        "release_date": "2021-02-17",
+        "release_date_precision": "day",
+        "total_tracks": 8,
+        "type": "album",
+        "uri": "spotify:album:3bj0rxNiqW8FPj2exowDFQ"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+          },
+          "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+          "id": "3y24PAHjsJ3rWvMWERM7Oe",
+          "name": "Bialystocks",
+          "type": "artist",
+          "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 256738,
+      "explicit": false,
+      "external_ids": { "isrc": "JPG102100112" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/3ILqA18bPvS8YzM9MJldPQ"
+      },
+      "href": "https://api.spotify.com/v1/tracks/3ILqA18bPvS8YzM9MJldPQ",
+      "id": "3ILqA18bPvS8YzM9MJldPQ",
+      "is_local": false,
+      "is_playable": true,
+      "name": "花束",
+      "track_number": 1,
+      "type": "track",
+      "uri": "spotify:track:3ILqA18bPvS8YzM9MJldPQ"
+    },
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+            },
+            "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+            "id": "3y24PAHjsJ3rWvMWERM7Oe",
+            "name": "Bialystocks",
+            "type": "artist",
+            "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/0fQZ2Vam7vMAvrGkPR7pxN"
+        },
+        "href": "https://api.spotify.com/v1/albums/0fQZ2Vam7vMAvrGkPR7pxN",
+        "id": "0fQZ2Vam7vMAvrGkPR7pxN",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b273f4386bbe861b3f926f99805c",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e02f4386bbe861b3f926f99805c",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d00004851f4386bbe861b3f926f99805c",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "Songs for the Cryptids",
+        "release_date": "2024-10-02",
+        "release_date_precision": "day",
+        "total_tracks": 10,
+        "type": "album",
+        "uri": "spotify:album:0fQZ2Vam7vMAvrGkPR7pxN"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+          },
+          "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+          "id": "3y24PAHjsJ3rWvMWERM7Oe",
+          "name": "Bialystocks",
+          "type": "artist",
+          "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 270133,
+      "explicit": false,
+      "external_ids": { "isrc": "JPPC02412637" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/3PZmElffT9j35oRlDAPbj5"
+      },
+      "href": "https://api.spotify.com/v1/tracks/3PZmElffT9j35oRlDAPbj5",
+      "id": "3PZmElffT9j35oRlDAPbj5",
+      "is_local": false,
+      "is_playable": true,
+      "name": "聞かせて",
+      "track_number": 6,
+      "type": "track",
+      "uri": "spotify:track:3PZmElffT9j35oRlDAPbj5"
+    },
+    {
+      "album": {
+        "album_type": "album",
+        "artists": [
+          {
+            "external_urls": {
+              "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+            },
+            "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+            "id": "3y24PAHjsJ3rWvMWERM7Oe",
+            "name": "Bialystocks",
+            "type": "artist",
+            "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+          }
+        ],
+        "external_urls": {
+          "spotify": "https://open.spotify.com/album/7dyuNqSWAptyjwzRVzCiOI"
+        },
+        "href": "https://api.spotify.com/v1/albums/7dyuNqSWAptyjwzRVzCiOI",
+        "id": "7dyuNqSWAptyjwzRVzCiOI",
+        "images": [
+          {
+            "height": 640,
+            "url": "https://i.scdn.co/image/ab67616d0000b2733113c15ccae20a68ae63dadd",
+            "width": 640
+          },
+          {
+            "height": 300,
+            "url": "https://i.scdn.co/image/ab67616d00001e023113c15ccae20a68ae63dadd",
+            "width": 300
+          },
+          {
+            "height": 64,
+            "url": "https://i.scdn.co/image/ab67616d000048513113c15ccae20a68ae63dadd",
+            "width": 64
+          }
+        ],
+        "is_playable": true,
+        "name": "Quicksand",
+        "release_date": "2022-11-30",
+        "release_date_precision": "day",
+        "total_tracks": 10,
+        "type": "album",
+        "uri": "spotify:album:7dyuNqSWAptyjwzRVzCiOI"
+      },
+      "artists": [
+        {
+          "external_urls": {
+            "spotify": "https://open.spotify.com/artist/3y24PAHjsJ3rWvMWERM7Oe"
+          },
+          "href": "https://api.spotify.com/v1/artists/3y24PAHjsJ3rWvMWERM7Oe",
+          "id": "3y24PAHjsJ3rWvMWERM7Oe",
+          "name": "Bialystocks",
+          "type": "artist",
+          "uri": "spotify:artist:3y24PAHjsJ3rWvMWERM7Oe"
+        }
+      ],
+      "disc_number": 1,
+      "duration_ms": 315973,
+      "explicit": false,
+      "external_ids": { "isrc": "JPPC02212781" },
+      "external_urls": {
+        "spotify": "https://open.spotify.com/track/4hfvanixmkK8EvoqcBbKW3"
+      },
+      "href": "https://api.spotify.com/v1/tracks/4hfvanixmkK8EvoqcBbKW3",
+      "id": "4hfvanixmkK8EvoqcBbKW3",
+      "is_local": false,
+      "is_playable": true,
+      "name": "雨宿り",
+      "track_number": 10,
+      "type": "track",
+      "uri": "spotify:track:4hfvanixmkK8EvoqcBbKW3"
+    }
+  ],
+  "total": 395,
+  "limit": 20,
+  "offset": 0,
+  "href": "https://api.spotify.com/v1/me/top/tracks?locale=*",
+  "next": "https://api.spotify.com/v1/me/top/tracks?offset=20&limit=20&locale=*",
+  "previous": null
+}
