@@ -1,4 +1,5 @@
 import Hero from "@/components/Hero";
+import NowPlayingClient from "@/components/NowPlayingClient";
 // import CharacterSheet from "@/components/CharacterSheet";
 
 export default function Home() {
@@ -11,6 +12,12 @@ export default function Home() {
         </p>
         <CharacterSheet />
       </div> */}
+      <NowPlayingClient
+        initial={{
+          status: "unavailable",
+          fetchedAt: Date.now(),
+        }}
+      />
     </div>
   );
 }

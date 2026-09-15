@@ -189,17 +189,8 @@ export default function NowPlayingClient({ initial }: { initial: NowPlaying }) {
   const [data, setData] = useState<NowPlaying>(initial);
   const [anchor, setAnchor] = useState<number | null>(null); // null until after mount
   const [elapsedMs, setElapsedMs] = useState(0);
-
-  useEffect(() => {
-    setAnchor(Date.now());
-    setElapsedMs(0);
-  }, [data]);
-
-  useEffect(() => {
-    if (data.status !== "playing" || anchor === null) return;
-    const id = setInterval(() => setElapsedMs(Date.now() - anchor), 1000);
-    return () => clearInterval(id);
-  }, [data, anchor]);
+  let pollTimeoutId = useRef<ReturnType<typeof setTimeout> | null>();
+  let currBackoffDelay = useRef(30_000);
 
   const fetchPoll = async () => {
     let fetchURL = "/api/spotify/now-playing";
@@ -208,7 +199,9 @@ export default function NowPlayingClient({ initial }: { initial: NowPlaying }) {
       fetchURL += `?mock=${windowSearchParams.get("spotify")}`;
     }
     try {
-      const response = await fetch(fetchURL);
+      const response = await fetch(fetchURL, {
+        cache: "no-store",
+      });
       if (!response.ok) {
         throw new Error(
           `NowPlayingClient Fetch Poll Response Status: ${response.status}`,
@@ -232,98 +225,157 @@ export default function NowPlayingClient({ initial }: { initial: NowPlaying }) {
         fetchedAt: resData.fetchedAt,
       });
     } catch (error: any) {
-      throw new Error(error.message);
+      pollTimeoutId.current = setTimeout(fetchPoll, currBackoffDelay.current);
+      if (currBackoffDelay.current * 2 < 300_000) {
+        currBackoffDelay.current = currBackoffDelay.current * 2;
+      } else {
+        currBackoffDelay.current = 300_000;
+      }
     }
   };
 
-  // return (
-  //   <section
-  //     aria-label="Currently playing music"
-  //     className="border-b border-editor-line px-4 py-6 sm:px-6"
-  //   >
-  //     <p className="mb-3 font-mono text-xs uppercase tracking-wide text-editor-muted">
-  //       Now Playing
-  //     </p>
+  useEffect(() => {
+    fetchPoll();
+    const handleVisibilityChange = () => {
+      if (!document.hidden) fetchPoll();
+    };
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+    };
+  }, []);
 
-  //     <div
-  //       className={`relative flex items-center gap-4 rounded-lg border-2 bg-editor-panel p-4 ${style.border}`}
-  //     >
-  //       <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded border border-editor-line bg-editor-panelAlt sm:h-20 sm:w-20">
-  //         {data.imageUrl ? (
-  //           <Image
-  //             src={data.imageUrl}
-  //             alt=""
-  //             width={80}
-  //             height={80}
-  //             unoptimized
-  //             className="h-full w-full object-cover"
-  //           />
-  //         ) : (
-  //           <SiSpotify
-  //             size={22}
-  //             className="absolute inset-0 m-auto text-editor-muted"
-  //             aria-hidden
-  //           />
-  //         )}
-  //       </div>
+  useEffect(() => {
+    setAnchor(Date.now());
+    setElapsedMs(0);
+    currBackoffDelay.current = 30_000;
+    if (document.hidden) return;
+    let remainingMs = 0;
+    if (
+      data.status !== "unavailable" &&
+      data.durationMs !== null &&
+      data.progressMs !== null
+    ) {
+      remainingMs = data.durationMs - data.progressMs;
+    }
 
-  //       <div className="min-w-0 flex-1">
-  //         <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide">
-  //           <span className="text-editor-teal">$</span>
-  //           <span className={style.accent}>{style.label}</span>
-  //           <Equalizer active={data.status === "playing"} />
-  //         </p>
-  //         <p
-  //           title={data.album ? `${data.title} — ${data.album}` : data.title}
-  //           className="mt-1 truncate font-mono text-sm text-editor-text sm:text-base"
-  //         >
-  //           {data.title}
-  //         </p>
-  //         <p className="truncate text-xs text-editor-muted sm:text-sm">
-  //           {data.artist}
-  //         </p>
+    switch (data.status) {
+      case "playing":
+        pollTimeoutId.current = setTimeout(
+          fetchPoll,
+          Math.min(15_000, remainingMs + 1_000),
+        );
+        break;
+      default:
+        pollTimeoutId.current = setTimeout(fetchPoll, 60_000);
+    }
 
-  //         {progress !== null && data.durationMs ? (
-  //           <div className="mt-2.5">
-  //             <div
-  //               className="h-1 w-full overflow-hidden rounded-full bg-editor-line"
-  //               role="presentation"
-  //             >
-  //               {/* key on the track: remounting kills the CSS transition, so a new song
-  //               snaps to 0% instead of animating backwards from 100% like a rewind */}
-  //               <div
-  //                 key={data.url ?? data.title}
-  //                 className={`h-full rounded-full ${style.bar} transition-[width] duration-1000 ease-linear motion-reduce:transition-none`}
-  //                 style={{ width: `${(progress / data.durationMs) * 100}%` }}
-  //               />
-  //             </div>
-  //             <div className="mt-1 flex justify-between font-mono text-[10px] tabular-nums text-editor-muted">
-  //               <span>{formatTime(progress)}</span>
-  //               <span>{formatTime(data.durationMs)}</span>
-  //             </div>
-  //           </div>
-  //         ) : null}
-  //       </div>
-  //     </div>
+    return () => {
+      if (pollTimeoutId.current) clearTimeout(pollTimeoutId.current);
+    };
+  }, [data]);
 
-  //     {data.url && (
-  //       <div className="mt-3 flex gap-4 border-t border-editor-line pt-3 font-mono text-xs">
-  //         <a
-  //           href={data.url}
-  //           target="_blank"
-  //           rel="noreferrer"
-  //           className="inline-flex items-center gap-1.5 text-editor-amber hover:underline"
-  //         >
-  //           <SiSpotify size={13} color="currentColor" title="" aria-hidden />{" "}
-  //           open in spotify →
-  //         </a>
-  //       </div>
-  //     )}
+  useEffect(() => {
+    if (data.status !== "playing" || anchor === null) return;
+    const id = setInterval(() => setElapsedMs(Date.now() - anchor), 1000);
+    return () => clearInterval(id);
+  }, [data, anchor]);
 
-  //     <p
-  //       aria-live="polite"
-  //       className="sr-only"
-  //     >{`${style.label}: ${data.title} by ${data.artist}`}</p>
-  //   </section>
-  // );
+  if (data.status === "unavailable") return null;
+  const style = statusStyles[data.status];
+  const progress =
+    data.status === "playing"
+      ? (data.progressMs ?? 0) + elapsedMs
+      : data.progressMs;
+
+  return (
+    <section
+      aria-label="Currently playing music"
+      className="border-b border-editor-line px-4 py-6 sm:px-6"
+    >
+      <p className="mb-3 font-mono text-xs uppercase tracking-wide text-editor-muted">
+        Now Playing
+      </p>
+
+      <div
+        className={`relative flex items-center gap-4 rounded-lg border-2 bg-editor-panel p-4 ${style.border}`}
+      >
+        <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded border border-editor-line bg-editor-panelAlt sm:h-20 sm:w-20">
+          {data.imageUrl ? (
+            <Image
+              src={data.imageUrl}
+              alt=""
+              width={80}
+              height={80}
+              unoptimized
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <SiSpotify
+              size={22}
+              className="absolute inset-0 m-auto text-editor-muted"
+              aria-hidden
+            />
+          )}
+        </div>
+
+        <div className="min-w-0 flex-1">
+          <p className="flex items-center gap-2 font-mono text-[11px] uppercase tracking-wide">
+            <span className="text-editor-teal">$</span>
+            <span className={style.accent}>{style.label}</span>
+            <Equalizer active={data.status === "playing"} />
+          </p>
+          <p
+            title={data.album ? `${data.title} — ${data.album}` : data.title}
+            className="mt-1 truncate font-mono text-sm text-editor-text sm:text-base"
+          >
+            {data.title}
+          </p>
+          <p className="truncate text-xs text-editor-muted sm:text-sm">
+            {data.artist}
+          </p>
+
+          {progress !== null && data.durationMs ? (
+            <div className="mt-2.5">
+              <div
+                className="h-1 w-full overflow-hidden rounded-full bg-editor-line"
+                role="presentation"
+              >
+                {/* key on the track: remounting kills the CSS transition, so a new song
+                snaps to 0% instead of animating backwards from 100% like a rewind */}
+                <div
+                  key={data.url ?? data.title}
+                  className={`h-full rounded-full ${style.bar} transition-[width] duration-1000 ease-linear motion-reduce:transition-none`}
+                  style={{ width: `${(progress / data.durationMs) * 100}%` }}
+                />
+              </div>
+              <div className="mt-1 flex justify-between font-mono text-[10px] tabular-nums text-editor-muted">
+                <span>{formatTime(progress)}</span>
+                <span>{formatTime(data.durationMs)}</span>
+              </div>
+            </div>
+          ) : null}
+        </div>
+      </div>
+
+      {data.url && (
+        <div className="mt-3 flex gap-4 border-t border-editor-line pt-3 font-mono text-xs">
+          <a
+            href={data.url}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-1.5 text-editor-amber hover:underline"
+          >
+            <SiSpotify size={13} color="currentColor" title="" aria-hidden />{" "}
+            open in spotify →
+          </a>
+        </div>
+      )}
+
+      <p
+        aria-live="polite"
+        className="sr-only"
+      >{`${style.label}: ${data.title} by ${data.artist}`}</p>
+    </section>
+  );
 }
