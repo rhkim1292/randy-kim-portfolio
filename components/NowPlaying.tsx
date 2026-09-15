@@ -35,4 +35,8 @@ import { getNowPlaying, isSpotifyConfigured } from "@/lib/spotify";
 //      (app/api/spotify/now-playing/route.ts), which is already dynamic by
 //      design — getNowPlaying's `mode` parameter is what lets the same
 //      function serve both call sites correctly.
-export default async function NowPlaying() {}
+export default async function NowPlaying() {
+  if (!isSpotifyConfigured()) return null;
+  const initial = await getNowPlaying({ revalidate: 30 });
+  return <NowPlayingClient initial={initial} />;
+}
