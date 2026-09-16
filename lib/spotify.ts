@@ -72,7 +72,7 @@ export async function getAccessToken(): Promise<string | null> {
       grant_type: "refresh_token",
       refresh_token: refreshToken,
     }),
-    cache: "no-store",
+    next: { revalidate: 3600 },
     signal: AbortSignal.timeout(TIMEOUT_MS),
   });
 

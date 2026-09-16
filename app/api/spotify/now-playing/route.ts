@@ -171,6 +171,7 @@ export async function GET(request: Request) {
   return Response.json(memo.data, {
     headers: {
       "Cache-Control": "public, s-maxage=15, stale-while-revalidate=45",
+      Age: String(Math.floor((Date.now() - memo.at) / 1000)),
     },
   });
 }
