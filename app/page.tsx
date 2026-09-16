@@ -1,6 +1,9 @@
 import Hero from "@/components/Hero";
 import NowPlaying from "@/components/NowPlaying";
+import TopTracks from "@/components/TopTracks";
 // import CharacterSheet from "@/components/CharacterSheet";
+
+export const revalidate = 30;
 
 export default function Home() {
   return (
@@ -13,6 +16,7 @@ export default function Home() {
         <CharacterSheet />
       </div> */}
       <NowPlaying />
+      <TopTracks />
     </div>
   );
 }
